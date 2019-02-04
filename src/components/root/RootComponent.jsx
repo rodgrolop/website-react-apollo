@@ -28,11 +28,11 @@ import PageContainerComponent from '../pageContainer'
 import '../../assets/App.css'
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3006/graphql'
+  uri: 'http://localhost:8000/graphql'
 })
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3006/graphql`,
+  uri: `ws://localhost:8000/graphql`,
   options: {
     reconnect: true
   }
@@ -97,33 +97,29 @@ const signOut = client => {
   // history.push(paths.SIGN_IN)
 }
 
-class RootComponent extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     isAuth: false,
-  //     user: {}
-  //   }
-  // }
+// constructor(props) {
+//   super(props)
+//   this.state = {
+//     isAuth: false,
+//     user: {}
+//   }
+// }
 
-  render() {
-    return (
-      <AppContextProvider>
-        <ApolloProvider client={client}>
-          <MuiThemeProvider theme={theme}>
-            <PageContainerComponent />
-            {/* <ApolloConsumer>
+const RootComponent = () => (
+  <AppContextProvider>
+    <ApolloProvider client={client}>
+      <MuiThemeProvider theme={theme}>
+        <PageContainerComponent />
+        {/* <ApolloConsumer>
               {client => (
                 <button type="button" onClick={() => signOut(client)}>
                   Sign Out
                 </button>
               )}
             </ApolloConsumer> */}
-          </MuiThemeProvider>
-        </ApolloProvider>
-      </AppContextProvider>
-    )
-  }
-}
+      </MuiThemeProvider>
+    </ApolloProvider>
+  </AppContextProvider>
+)
 
 export default RootComponent

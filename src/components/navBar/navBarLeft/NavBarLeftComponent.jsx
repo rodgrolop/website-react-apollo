@@ -1,27 +1,24 @@
-import React, { Component } from 'react'
-import NavDrawerComponent from '../../navDrawer'
+import React, { useState } from 'react'
+
 import MenuButtonComponent from './menuButton'
+import NavDrawerComponent from '../../navDrawer'
 
-class NavBarLeftComponent extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { isNavDrawerOpen: false }
+const NavBarLeftComponent = () => {
+  const [isNavDrawerOpen, toggleNavDrawerState] = useState(false)
+
+  const toggleNavDrawer = () => {
+    toggleNavDrawerState(!isNavDrawerOpen)
   }
 
-  toggleNavDrawer = () => {
-    this.setState({ isNavDrawerOpen: !this.state.isNavDrawerOpen })
-  }
-  render() {
-    return (
-      <React.Fragment>
-        <MenuButtonComponent toggleNavDrawer={this.toggleNavDrawer} />
-        <NavDrawerComponent
-          isNavDrawerOpen={this.state.isNavDrawerOpen}
-          toggleNavDrawer={this.toggleNavDrawer}
-        />
-      </React.Fragment>
-    )
-  }
+  return (
+    <React.Fragment>
+      <MenuButtonComponent toggleNavDrawer={toggleNavDrawer} />
+      <NavDrawerComponent
+        isNavDrawerOpen={isNavDrawerOpen}
+        toggleNavDrawer={toggleNavDrawer}
+      />
+    </React.Fragment>
+  )
 }
 
 export default NavBarLeftComponent

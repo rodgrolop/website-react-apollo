@@ -1,2 +1,3 @@
 import NavBarRightComponent from './NavBarRightComponent'
-export default NavBarRightComponent
+import { withAppContext } from '../../../appContext'
+export default withAppContext(NavBarRightComponent)
