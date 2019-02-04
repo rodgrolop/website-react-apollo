@@ -1,27 +1,16 @@
-import React from 'react'
-import { AppContext } from './appContext'
+import React, { useState, createContext } from 'react'
+export const AppContext = createContext()
 
-export default class AppContextProvider extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      isAuth: false
-    }
-  }
+const AppContextProvider = props => {
+  const [isAuth, toggleAuthState] = useState(false)
 
-  toggleAuth = () => {
-    this.setState({ isAuth: !this.state.isAuth })
+  const toggleAuth = () => {
+    toggleAuthState(!isAuth)
   }
-  render() {
-    return (
-      <AppContext.Provider
-        value={{
-          appContext: { ...this.state },
-          toggleAuth: this.toggleAuth
-        }}
-      >
-        {this.props.children}
-      </AppContext.Provider>
-    )
-  }
+  return (
+    <AppContext.Provider value={{ isAuth, toggleAuth }}>
+      {props.children}
+    </AppContext.Provider>
+  )
 }
+export default AppContextProvider

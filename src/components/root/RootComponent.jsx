@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 // Context
 import AppContextProvider from '../../appContext'
 
 // Apollo modules
-import { ApolloProvider } from 'react-apollo'
-import { ApolloConsumer } from 'react-apollo'
+import { ApolloProvider, ApolloConsumer } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { getMainDefinition } from 'apollo-utilities'
 import { ApolloLink, split } from 'apollo-link'
@@ -28,11 +27,11 @@ import PageContainerComponent from '../pageContainer'
 import '../../assets/App.css'
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:8000/graphql'
+  uri: 'http://localhost:3006/graphql'
 })
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:8000/graphql`,
+  uri: `ws://localhost:3006/graphql`,
   options: {
     reconnect: true
   }

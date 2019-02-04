@@ -38,6 +38,11 @@ const theme = createMuiTheme({
     // Use typography v2
     useNextVariants: true
   }
+  // overrides: {
+  //   MuiCircularProgress: {
+  //     color: 'white'
+  //   }
+  // }
 })
 
 export default theme

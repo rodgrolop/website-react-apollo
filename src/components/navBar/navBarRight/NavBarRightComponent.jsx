@@ -1,18 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, Suspense, lazy } from 'react'
+import { AppContext } from './../../../appContext'
 
-import IsAuthAccountButtonsComponent from './isAuthAccountButtons'
-import NoIsAuthAccountButtonsComponent from './noIsAuthAccountButtons'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
-const NavBarRightComponent = props => {
-  const [isSignDialogOpen, toggleDialogState] = useState(false)
+const IsAuthAccountButtonsComponent = lazy(() =>
+  import('./isAuthAccountButtons')
+)
+const NoIsAuthAccountButtonsComponent = lazy(() =>
+  import('./noIsAuthAccountButtons')
+)
+
+const NavBarRightComponent = () => {
+  const appContext = useContext(AppContext)
+  const [isSignDialogOpen, toggleSignDialogState] = useState(false)
 
   const toggleSignDialog = () => {
-    toggleDialogState(!isSignDialogOpen)
+    toggleSignDialogState(!isSignDialogOpen)
   }
-  return props.appContext.isAuth ? (
-    <IsAuthAccountButtonsComponent toggleSignDialog={toggleSignDialog} />
+  return appContext.isAuth ? (
+    <Suspense fallback={<CircularProgress color="secondary" size={20} />}>
+      <IsAuthAccountButtonsComponent toggleSignDialog={toggleSignDialog} />
+    </Suspense>
   ) : (
-    <NoIsAuthAccountButtonsComponent toggleSignDialog={toggleSignDialog} />
+    <Suspense fallback={<CircularProgress color="secondary" size={20} />}>
+      <NoIsAuthAccountButtonsComponent toggleSignDialog={toggleSignDialog} />
+    </Suspense>
   )
 }
 

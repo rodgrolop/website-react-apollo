@@ -8,13 +8,14 @@ import NavBarLeftComponent from './navBarLeft'
 
 const NavBarComponent = props => (
   <div className={props.classes.root}>
-    <AppBar position='sticky' color='primary'>
+    <AppBar position="sticky" color="primary">
       <Toolbar>
         <NavBarLeftComponent />
         <div className={props.classes.grow} />
         <NavBarRightComponent />
       </Toolbar>
     </AppBar>
+    {console.log('hola')}
   </div>
 )
 

@@ -5,8 +5,8 @@ import MenuIcon from '@material-ui/icons/Menu'
 
 const MenuButtonComponent = React.memo(props => (
   <IconButton
-    color='inherit'
-    aria-label='Open drawer'
+    color="inherit"
+    aria-label="Open drawer"
     onClick={props.toggleNavDrawer}
   >
     <MenuIcon />
