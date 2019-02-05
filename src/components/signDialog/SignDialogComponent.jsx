@@ -7,7 +7,7 @@ const SignDialogComponent = props => (
   <Dialog
     open={props.isSignDialogOpen}
     onClose={props.toggleSignDialog}
-    aria-labelledby="form-dialog-title"
+    aria-labelledby='form-dialog-title'
   >
     <SignInFormComponent />
     {/* <SignUpFormComponent /> */}

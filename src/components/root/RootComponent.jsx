@@ -27,11 +27,11 @@ import PageContainerComponent from '../pageContainer'
 import '../../assets/App.css'
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3006/graphql'
+  uri: 'http://localhost:8000/graphql'
 })
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3006/graphql`,
+  uri: `ws://localhost:8000/graphql`,
   options: {
     reconnect: true
   }

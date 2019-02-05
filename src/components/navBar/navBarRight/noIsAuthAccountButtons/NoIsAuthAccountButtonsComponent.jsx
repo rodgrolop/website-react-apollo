@@ -8,15 +8,15 @@ const NoIsAuthAccountButtonsComponent = props => {
   const [anchorEl, setDesktopMenuState] = useState(null)
   const isMenuOpen = Boolean(anchorEl)
 
-  const toggleProfileMenuDesktop = event => {
+  const toggleProfileMenu = event => {
     setDesktopMenuState(isMenuOpen ? null : event.currentTarget)
   }
   return (
     <React.Fragment>
       <IconButton
-        aria-haspopup="true"
-        onClick={toggleProfileMenuDesktop}
-        color="inherit"
+        aria-haspopup='true'
+        onClick={toggleProfileMenu}
+        color='inherit'
       >
         <AccountCircle />
       </IconButton>
@@ -25,10 +25,10 @@ const NoIsAuthAccountButtonsComponent = props => {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={isMenuOpen}
-        onClose={toggleProfileMenuDesktop}
+        onClose={toggleProfileMenu}
       >
         <MenuItem onClick={props.toggleSignDialog}>Sign In</MenuItem>
-        <MenuItem onClick={toggleProfileMenuDesktop}>Sign Up</MenuItem>
+        <MenuItem onClick={toggleProfileMenu}>Sign Up</MenuItem>
       </Menu>
     </React.Fragment>
   )
