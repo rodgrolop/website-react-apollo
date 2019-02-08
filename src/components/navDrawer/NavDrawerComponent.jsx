@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
@@ -7,6 +7,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
+
+import { LayOutContext } from '../../context'
 
 const sideList = (
   <React.Fragment>
@@ -34,19 +36,25 @@ const sideList = (
   </React.Fragment>
 )
 
-const NavDrawerComponent = props => (
-  <React.Fragment>
-    <Drawer open={props.isNavDrawerOpen} onClose={props.toggleNavDrawer}>
-      <div
-        tabIndex={0}
-        role="button"
-        onClick={props.toggleNavDrawer}
-        onKeyDown={props.toggleNavDrawer}
+const NavDrawerComponent = props => {
+  const appContext = useContext(LayOutContext)
+  return (
+    <React.Fragment>
+      <Drawer
+        open={appContext.isNavDrawerOpen}
+        onClose={appContext.toggleNavDrawer}
       >
-        {sideList}
-      </div>
-    </Drawer>
-  </React.Fragment>
-)
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={appContext.toggleNavDrawer}
+          onKeyDown={appContext.toggleNavDrawer}
+        >
+          {sideList}
+        </div>
+      </Drawer>
+    </React.Fragment>
+  )
+}
 
 export default NavDrawerComponent

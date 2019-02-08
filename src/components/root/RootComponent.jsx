@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Context
-import AppContextProvider from '../../appContext'
+import { AppContextProvider, LayOutContextProvider } from '../../context'
 
 // Apollo modules
 import { ApolloProvider, ApolloConsumer } from 'react-apollo'
@@ -27,11 +27,11 @@ import PageContainerComponent from '../pageContainer'
 import '../../assets/App.css'
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:8000/graphql'
+  uri: 'http://localhost:3006/graphql'
 })
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:8000/graphql`,
+  uri: `ws://localhost:3006/graphql`,
   options: {
     reconnect: true
   }
@@ -96,29 +96,27 @@ const signOut = client => {
   // history.push(paths.SIGN_IN)
 }
 
-// constructor(props) {
-//   super(props)
-//   this.state = {
-//     isAuth: false,
-//     user: {}
-//   }
-// }
-
-const RootComponent = () => (
-  <AppContextProvider>
-    <ApolloProvider client={client}>
-      <MuiThemeProvider theme={theme}>
-        <PageContainerComponent />
-        {/* <ApolloConsumer>
+const RootComponent = () => {
+  return (
+    <AppContextProvider>
+      <LayOutContextProvider>
+        <ApolloProvider client={client}>
+          <MuiThemeProvider theme={theme}>
+            <PageContainerComponent
+            // appContext={appContext}
+            />
+            {/* <ApolloConsumer>
               {client => (
                 <button type="button" onClick={() => signOut(client)}>
                   Sign Out
                 </button>
               )}
             </ApolloConsumer> */}
-      </MuiThemeProvider>
-    </ApolloProvider>
-  </AppContextProvider>
-)
+          </MuiThemeProvider>
+        </ApolloProvider>
+      </LayOutContextProvider>
+    </AppContextProvider>
+  )
+}
 
 export default RootComponent

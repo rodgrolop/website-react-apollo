@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
+
 import grey from '@material-ui/core/colors/grey'
 import red from '@material-ui/core/colors/red'
 
@@ -36,13 +37,12 @@ const theme = createMuiTheme({
   },
   typography: {
     // Use typography v2
-    useNextVariants: true
+    useNextVariants: true,
+    fontSize: 12
+  },
+  overrides: {
+    MuiIconButton: {}
   }
-  // overrides: {
-  //   MuiCircularProgress: {
-  //     color: 'white'
-  //   }
-  // }
 })
 
 export default theme

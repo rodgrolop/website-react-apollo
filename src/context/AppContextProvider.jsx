@@ -2,13 +2,13 @@ import React, { useState, createContext } from 'react'
 export const AppContext = createContext()
 
 const AppContextProvider = props => {
-  const [isAuth, toggleAuthState] = useState(false)
+  const [isAuth, setAuthState] = useState(false)
 
-  const toggleAuth = () => {
-    toggleAuthState(!isAuth)
+  const setAuth = () => {
+    setAuthState(true)
   }
   return (
-    <AppContext.Provider value={{ isAuth, toggleAuth }}>
+    <AppContext.Provider value={{ isAuth, setAuth }}>
       {props.children}
     </AppContext.Provider>
   )

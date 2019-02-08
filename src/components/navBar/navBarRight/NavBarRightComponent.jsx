@@ -1,36 +1,18 @@
-import React, { useState, useContext, Suspense, lazy } from 'react'
-import { AppContext } from '../../../appContext'
+import React, { useContext } from 'react'
+import { AppContext, LayOutContext } from '../../../context'
 
-import CircularProgress from '@material-ui/core/CircularProgress'
-import SignDialogComponent from '../../signDialog'
-
-const IsAuthAccountButtonsComponent = lazy(() =>
-  import('./isAuthAccountButtons')
-)
-const NoIsAuthAccountButtonsComponent = lazy(() =>
-  import('./noIsAuthAccountButtons')
-)
-// const SignDialogComponent = lazy(() => import('../../signDialog'))
+import AccountButtonsComponent from './accountButtons'
 
 const NavBarRightComponent = () => {
   const appContext = useContext(AppContext)
-  const [isSignDialogOpen, toggleSignDialogState] = useState(false)
-
-  const toggleSignDialog = () => {
-    toggleSignDialogState(!isSignDialogOpen)
-  }
-  return appContext.isAuth ? (
-    <Suspense fallback={<CircularProgress color='secondary' size={20} />}>
-      <IsAuthAccountButtonsComponent toggleSignDialog={toggleSignDialog} />
-    </Suspense>
-  ) : (
-    <Suspense fallback={<CircularProgress color='secondary' size={20} />}>
-      <NoIsAuthAccountButtonsComponent toggleSignDialog={toggleSignDialog} />
-      <SignDialogComponent
-        isSignDialogOpen={isSignDialogOpen}
-        toggleSignDialog={toggleSignDialog}
+  const layOutContext = useContext(LayOutContext)
+  return (
+    <React.Fragment>
+      <AccountButtonsComponent
+        isAuth={appContext.isAuth}
+        toggleSignDialog={layOutContext.toggleSignDialog}
       />
-    </Suspense>
+    </React.Fragment>
   )
 }
 

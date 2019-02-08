@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useContext, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -8,6 +8,8 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
+import { AppContext } from '../../../context'
+
 const SIGN_IN = gql`
   mutation($login: String!, $password: String!) {
     signIn(login: $login, password: $password) {
@@ -15,89 +17,66 @@ const SIGN_IN = gql`
     }
   }
 `
-
-const SignInFormComponent = () => (
-  <SignInForm
-  // history={history}
-  // refetch={refetch}
-  />
-)
-
-const INITIAL_STATE = {
+const initialInputsState = {
   login: '',
   password: ''
 }
 
-class SignInForm extends Component {
-  state = { ...INITIAL_STATE }
+const SignInFormComponent = props => {
+  const [inputValues, setInputValues] = useState(initialInputsState)
+  const appContext = useContext(AppContext)
 
-  onChange = event => {
-    const { name, value } = event.target
-    this.setState({ [name]: value })
+  const updateField = event => {
+    setInputValues({ ...inputValues, [event.target.name]: event.target.value })
   }
 
-  onSubmit = (event, signIn) => {
+  const onSubmit = signIn => {
     signIn().then(async ({ data }) => {
-      this.setState({ ...INITIAL_STATE })
-
+      setInputValues({ ...inputValues, ...initialInputsState })
       localStorage.setItem('token', data.signIn.token)
-
-      // await this.props.refetch()
-
+      await appContext.setAuth(true)
       // this.props.history.push(paths.LANDING)
     })
-
-    event.preventDefault()
   }
+  const { login, password } = { ...inputValues }
+  const isInvalid = password === '' || login === ''
 
-  render() {
-    const { login, password } = this.state
+  return (
+    <DialogContent>
+      <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+      <Mutation mutation={SIGN_IN} variables={{ login, password }}>
+        {(signIn, { data, loading, error }) => (
+          <React.Fragment>
+            <TextField
+              name="login"
+              value={inputValues.login}
+              onChange={updateField}
+              type="text"
+              placeholder="Email or Username"
+            />
+            <TextField
+              name="password"
+              value={inputValues.password}
+              onChange={updateField}
+              type="password"
+              placeholder="Password"
+            />
 
-    const isInvalid = password === '' || login === ''
-
-    return (
-      <React.Fragment>
-        <DialogContent>
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-          <Mutation mutation={SIGN_IN} variables={{ login, password }}>
-            {(signIn, { data, loading, error }) => (
-              <form onSubmit={event => this.onSubmit(event, signIn)}>
-                <TextField
-                  name="login"
-                  value={login}
-                  onChange={this.onChange}
-                  type="text"
-                  placeholder="Email or Username"
-                />
-                <TextField
-                  name="password"
-                  value={password}
-                  onChange={this.onChange}
-                  type="password"
-                  placeholder="Password"
-                />
-                <Button
-                  disabled={isInvalid || loading}
-                  type="submit"
-                  color="primary"
-                >
-                  Sign In
-                </Button>
-
-                <DialogActions>
-                  {/* <Button onClick={props.toggleSignDialog} color="primary">
-                  Cancel
-                </Button> */}
-                </DialogActions>
-              </form>
-            )}
-          </Mutation>
-        </DialogContent>
-      </React.Fragment>
-    )
-  }
+            <DialogActions>
+              <Button
+                disabled={isInvalid || loading}
+                type="submit"
+                color="primary"
+                onClick={() => onSubmit(signIn)}
+              >
+                Sign In
+              </Button>
+            </DialogActions>
+          </React.Fragment>
+        )}
+      </Mutation>
+    </DialogContent>
+  )
 }
 
 export default SignInFormComponent
-
-export { SignInForm }
