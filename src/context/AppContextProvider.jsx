@@ -1,16 +1,26 @@
-import React, { useState, createContext } from 'react'
+import React, { useReducer, createContext } from 'react'
 export const AppContext = createContext()
 
-const AppContextProvider = props => {
-  const [isAuth, setAuthState] = useState(false)
+const initialState = {
+  isUserAuth: false
+}
 
-  const setAuth = () => {
-    setAuthState(true)
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'logInUser':
+      return { ...state, isUserAuth: true }
+    case 'logOutUser':
+      return { ...state, isUserAuth: false }
+    default:
+      return { initialState }
   }
+}
+
+const AppContextProvider = props => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const value = { state, dispatch }
   return (
-    <AppContext.Provider value={{ isAuth, setAuth }}>
-      {props.children}
-    </AppContext.Provider>
+    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
   )
 }
 export default AppContextProvider

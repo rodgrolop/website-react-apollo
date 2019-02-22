@@ -1,18 +1,11 @@
-import React, { useContext } from 'react'
-import { LayOutContext } from '../../../../context'
+import React from 'react'
 
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 
-const MenuButtonComponent = () => {
-  const appContext = useContext(LayOutContext)
+const MenuButtonComponent = ({ toggleDrawer }) => {
   return (
-    <IconButton
-      color="inherit"
-      aria-label="Open drawer"
-      onClick={appContext.toggleNavDrawer}
-    >
-      {console.log('hola')}
+    <IconButton color="inherit" onClick={toggleDrawer}>
       <MenuIcon />
     </IconButton>
   )

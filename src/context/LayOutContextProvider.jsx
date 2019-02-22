@@ -1,25 +1,27 @@
-import React, { useState, createContext } from 'react'
+import React, { useReducer, createContext } from 'react'
 export const LayOutContext = createContext()
 
-const LayOutContextProvider = props => {
-  const [isNavDrawerOpen, toggleNavDrawerState] = useState(false)
-  const [isSignDialogOpen, toggleSignDialogState] = useState(false)
-  const toggleNavDrawer = () => {
-    toggleNavDrawerState(!isNavDrawerOpen)
-  }
+const initialState = {
+  isNavDrawerOpen: false,
+  isSignDialogOpen: false
+}
 
-  const toggleSignDialog = () => {
-    toggleSignDialogState(!isSignDialogOpen)
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'toggleDrawer':
+      return { ...state, isNavDrawerOpen: !state.isNavDrawerOpen }
+    case 'toggleSignDialog':
+      return { ...state, isSignDialogOpen: !state.isSignDialogOpen }
+    default:
+      return { initialState }
   }
+}
+
+const LayOutContextProvider = props => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const value = { state, dispatch }
   return (
-    <LayOutContext.Provider
-      value={{
-        isNavDrawerOpen,
-        toggleNavDrawer,
-        isSignDialogOpen,
-        toggleSignDialog
-      }}
-    >
+    <LayOutContext.Provider value={value}>
       {props.children}
     </LayOutContext.Provider>
   )

@@ -99,22 +99,20 @@ const signOut = client => {
 const RootComponent = () => {
   return (
     <AppContextProvider>
-      <LayOutContextProvider>
-        <ApolloProvider client={client}>
-          <MuiThemeProvider theme={theme}>
-            <PageContainerComponent
-            // appContext={appContext}
-            />
-            {/* <ApolloConsumer>
+      <ApolloProvider client={client}>
+        <MuiThemeProvider theme={theme}>
+          <PageContainerComponent
+          // appContext={appContext}
+          />
+          {/* <ApolloConsumer>
               {client => (
                 <button type="button" onClick={() => signOut(client)}>
                   Sign Out
                 </button>
               )}
             </ApolloConsumer> */}
-          </MuiThemeProvider>
-        </ApolloProvider>
-      </LayOutContextProvider>
+        </MuiThemeProvider>
+      </ApolloProvider>
     </AppContextProvider>
   )
 }
