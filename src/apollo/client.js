@@ -7,11 +7,11 @@ import { onError } from 'apollo-link-error'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3006/graphql'
+  uri: 'http://localhost:4000'
 })
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3006/graphql`,
+  uri: `ws://localhost:4000`,
   options: {
     reconnect: true
   }

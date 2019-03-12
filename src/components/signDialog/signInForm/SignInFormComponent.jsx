@@ -11,14 +11,14 @@ import gql from 'graphql-tag'
 import { AppContext } from '../../../context'
 
 const SIGN_IN = gql`
-  mutation($login: String!, $password: String!) {
-    signIn(login: $login, password: $password) {
+  mutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       token
     }
   }
 `
 const initialInputsState = {
-  login: '',
+  email: '',
   password: ''
 }
 
@@ -30,44 +30,44 @@ const SignInFormComponent = props => {
     setInputValues({ ...inputValues, [event.target.name]: event.target.value })
   }
 
-  const onSubmit = signIn => {
-    signIn().then(async ({ data }) => {
+  const onSubmit = login => {
+    login().then(async ({ data }) => {
       setInputValues({ ...inputValues, ...initialInputsState })
-      localStorage.setItem('token', data.signIn.token)
-      await appContext.setAuth(true)
+      localStorage.setItem('token', data.login.token)
+      await appContext.dispatch({ type: 'logInUser' })
       // this.props.history.push(paths.LANDING)
     })
   }
-  const { login, password } = { ...inputValues }
-  const isInvalid = password === '' || login === ''
+  const { email, password } = { ...inputValues }
+  const isInvalid = password === '' || email === ''
 
   return (
     <DialogContent>
-      <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-      <Mutation mutation={SIGN_IN} variables={{ login, password }}>
-        {(signIn, { data, loading, error }) => (
+      <DialogTitle id='form-dialog-title'>Subscribe</DialogTitle>
+      <Mutation mutation={SIGN_IN} variables={{ email, password }}>
+        {(login, { data, loading, error }) => (
           <React.Fragment>
             <TextField
-              name="login"
-              value={inputValues.login}
+              name='email'
+              value={inputValues.email}
               onChange={updateField}
-              type="text"
-              placeholder="Email or Username"
+              type='text'
+              placeholder='Email or Username'
             />
             <TextField
-              name="password"
+              name='password'
               value={inputValues.password}
               onChange={updateField}
-              type="password"
-              placeholder="Password"
+              type='password'
+              placeholder='Password'
             />
 
             <DialogActions>
               <Button
                 disabled={isInvalid || loading}
-                type="submit"
-                color="primary"
-                onClick={() => onSubmit(signIn)}
+                type='submit'
+                color='primary'
+                onClick={() => onSubmit(login)}
               >
                 Sign In
               </Button>
