@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Context
-import { AppContextProvider, LayOutContextProvider } from '../../context'
+import { AppContextProvider, SideBarContextProvider } from '../../context'
 
 // Theme provider
 import ThemeProviderComponent from '../../theme'
@@ -18,20 +18,22 @@ import '../../assets/App.css'
 const RootComponent = () => {
   return (
     <AppContextProvider>
-      <ThemeProviderComponent>
-        <ApolloProviderComponent>
-          <PageContainerComponent
-          // appContext={appContext}
-          />
-          {/* <ApolloConsumer>
+      <SideBarContextProvider>
+        <ThemeProviderComponent>
+          <ApolloProviderComponent>
+            <PageContainerComponent
+            // appContext={appContext}
+            />
+            {/* <ApolloConsumer>
               {client => (
                 <button type="button" onClick={() => signOut(client)}>
                   Sign Out
                 </button>
               )}
             </ApolloConsumer> */}
-        </ApolloProviderComponent>
-      </ThemeProviderComponent>
+          </ApolloProviderComponent>
+        </ThemeProviderComponent>
+      </SideBarContextProvider>
     </AppContextProvider>
   )
 }

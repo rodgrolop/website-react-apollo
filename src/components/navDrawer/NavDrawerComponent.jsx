@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { SideBarContext } from '../../context/SideBarContextProvider'
 
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
@@ -36,14 +38,20 @@ const sideList = (
 )
 
 const NavDrawerComponent = ({ isDrawerOpen, toggleDrawer }) => {
+  const { state, dispatch } = useContext(SideBarContext)
+
+  const closeDrawer = () => {
+    dispatch({ type: 'closeDrawer' })
+  }
+
   return (
     <React.Fragment>
-      <Drawer open={isDrawerOpen} onClose={toggleDrawer}>
+      <Drawer open={state.isDrawerOpen} onClose={closeDrawer}>
         <div
           tabIndex={0}
-          role="button"
-          onClick={toggleDrawer}
-          onKeyDown={toggleDrawer}
+          role='button'
+          onClick={closeDrawer}
+          onKeyDown={closeDrawer}
         >
           {sideList}
         </div>

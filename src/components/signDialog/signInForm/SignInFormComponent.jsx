@@ -34,7 +34,7 @@ const SignInFormComponent = props => {
     login().then(async ({ data }) => {
       setInputValues({ ...inputValues, ...initialInputsState })
       localStorage.setItem('token', data.login.token)
-      await appContext.dispatch({ type: 'logInUser' })
+      appContext.dispatch({ type: 'logInUser' })
       // this.props.history.push(paths.LANDING)
     })
   }

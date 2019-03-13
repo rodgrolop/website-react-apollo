@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from 'react'
+import React, { useContext, useState, lazy, Suspense } from 'react'
 import { AppContext } from '../../../context'
 
 import IconButton from '@material-ui/core/IconButton'
@@ -12,7 +12,7 @@ import Badge from '@material-ui/core/Badge'
 const SignDialogComponent = lazy(() => import('../../signDialog'))
 
 const NavBarRightComponent = ({ classes }) => {
-  let { state, dispatch } = React.useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
   const [anchorEl, setDesktopMenuState] = useState(null)
   const [isSignDialogOpen, toggleSignDialogState] = useState(false)
   const isMenuOpen = Boolean(anchorEl)
@@ -29,19 +29,19 @@ const NavBarRightComponent = ({ classes }) => {
       {state.isUserAuth && (
         <React.Fragment>
           <IconButton>
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={4} color='secondary'>
               <MailIcon className={classes.icon} />
             </Badge>
           </IconButton>
           <IconButton>
-            <Badge badgeContent={6} color="secondary">
+            <Badge badgeContent={6} color='secondary'>
               <NotificationsIcon className={classes.icon} />
             </Badge>
           </IconButton>
         </React.Fragment>
       )}
       <IconButton
-        aria-haspopup="true"
+        aria-haspopup='true'
         onClick={state.isUserAuth ? toggleProfileMenu : toggleSignDialog}
       >
         <AccountCircle className={classes.icon} />
