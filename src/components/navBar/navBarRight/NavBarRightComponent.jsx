@@ -1,16 +1,20 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../../../context'
 
-import IconButton from '@material-ui/core/IconButton'
-import AccountCircle from '@material-ui/icons/AccountCircle'
+import Avatar from '@material-ui/core/Avatar'
 import MenuItem from '@material-ui/core/MenuItem'
 import Popover from '@material-ui/core/Popover'
+import IconButton from '@material-ui/core/IconButton'
+
+import AccountCircle from '@material-ui/icons/AccountCircle'
 import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import Badge from '@material-ui/core/Badge'
 
 const NavBarRightComponent = ({ classes }) => {
-  const { state } = useContext(AppContext)
+  const appContext = useContext(AppContext)
+  const openAuthDialog = () => appContext.dispatch({ type: 'openAuthDialog' })
+
   const [anchorEl, setDesktopMenuState] = useState(null)
   const isMenuOpen = Boolean(anchorEl)
 
@@ -20,7 +24,7 @@ const NavBarRightComponent = ({ classes }) => {
 
   return (
     <React.Fragment>
-      {state.isUserAuth && (
+      {appContext.state.isUserAuth && (
         <React.Fragment>
           <IconButton>
             <Badge badgeContent={4} color='secondary'>
@@ -34,10 +38,23 @@ const NavBarRightComponent = ({ classes }) => {
           </IconButton>
         </React.Fragment>
       )}
-      <IconButton aria-haspopup='true' onClick={null}>
-        <AccountCircle className={classes.icon} />
+      <IconButton
+        aria-haspopup='true'
+        onClick={
+          appContext.state.isUserAuth ? toggleProfileMenu : openAuthDialog
+        }
+      >
+        {appContext.state.isUserAuth ? (
+          <Avatar
+            alt={appContext.state.user.username}
+            src={appContext.state.user.profilePicture}
+            className={classes.icon}
+          />
+        ) : (
+          <AccountCircle className={classes.icon} />
+        )}
       </IconButton>
-      {state.isUserAuth && (
+      {appContext.state.isUserAuth && (
         <Popover
           anchorEl={anchorEl}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}

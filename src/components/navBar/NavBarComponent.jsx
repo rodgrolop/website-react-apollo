@@ -30,14 +30,8 @@ const NavBarComponent = ({ classes }) => {
         <Link to='/'>
           <strong>Home</strong>
         </Link>
-        <Link to={{ pathname: '/authentication', state: { activeTab: 0 } }}>
-          <strong>Login</strong>
-        </Link>
-        <Link to={{ pathname: '/authentication', state: { activeTab: 1 } }}>
-          <strong>Register</strong>
-        </Link>
-        <Link to={{ pathname: '/authentication', state: { activeTab: 2 } }}>
-          <strong>Pass</strong>
+        <Link to='/authentication'>
+          <strong>Auth</strong>
         </Link>
         <NavBarRightComponent />
       </Toolbar>
