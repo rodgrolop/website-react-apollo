@@ -2,22 +2,25 @@ import React, { useReducer, createContext } from 'react'
 export const AppContext = createContext()
 
 const initialState = {
-  isUserAuth: false,
-  user: {},
-  showAuthDialog: true
+  me: null,
+  showAuthDialog: false
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'getMe':
+      return {
+        ...state,
+        me: action.me
+      }
     case 'logInUser':
       return {
         ...state,
-        isUserAuth: true,
-        user: action.user,
+        me: action.me,
         showAuthDialog: false
       }
     case 'logOutUser':
-      return { ...state, isUserAuth: false }
+      return { ...state, isUserAuth: false, me: null }
     case 'openAuthDialog':
       return { ...state, showAuthDialog: true }
     case 'closeAuthDialog':

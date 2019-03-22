@@ -1,4 +1,4 @@
 // import paths
-import * as userQueries from './user'
+import { GET_ME } from './authQueries'
 
-export { userQueries }
+export { GET_ME }

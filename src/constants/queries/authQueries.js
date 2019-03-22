@@ -5,7 +5,7 @@ const GET_ME = gql`
     me {
       id
       username
-      email
+      profilePicture
       role
     }
   }

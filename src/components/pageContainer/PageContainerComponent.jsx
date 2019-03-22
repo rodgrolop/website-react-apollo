@@ -1,5 +1,8 @@
 import React, { useContext, Suspense, lazy } from 'react'
-import { AppContext } from '../../context'
+import { AppContext, DialogContext } from '../../context'
+
+import { Query } from 'react-apollo'
+import { GET_ME } from '../../constants/queries'
 
 // Custom Browser Switch
 import { RootSwitch } from '../../router'
@@ -8,20 +11,32 @@ import NavBarComponent from '../navBar'
 import NavDrawerComponent from '../navDrawer'
 
 const SignDialogComponent = lazy(() => import('../signDialog'))
+// const options= { fetchPolicy: 'cache-first' }
 
-const PageContainerComponent = () => {
+const PageContainerComponent = props => {
   const appContext = useContext(AppContext)
+  const dialogContext = useContext(DialogContext)
+  const { me } = appContext.state
+  const saveUserData = ({ data }) => {
+    !me && appContext.dispatch({ type: 'getMe', me: data.me })
+  }
   return (
-    <React.Fragment>
-      <NavBarComponent />
-      <NavDrawerComponent />
-      <RootSwitch />
-      {appContext.state.showAuthDialog && (
-        <Suspense fallback={null}>
-          <SignDialogComponent />
-        </Suspense>
-      )}
-    </React.Fragment>
+    <Query query={GET_ME} onCompleted={data => saveUserData({ data })}>
+      {({ loading, error, data }) => {
+        return (
+          <React.Fragment>
+            <NavBarComponent />
+            <NavDrawerComponent />
+            <RootSwitch />
+            {dialogContext.state.isSignDialogOpen && (
+              <Suspense fallback={null}>
+                <SignDialogComponent />
+              </Suspense>
+            )}
+          </React.Fragment>
+        )
+      }}
+    </Query>
   )
 }
 

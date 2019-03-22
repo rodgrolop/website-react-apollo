@@ -2,9 +2,7 @@ import React, { useContext } from 'react'
 
 import { SideBarContext } from '../../context/SideBarContextProvider'
 
-import NavDrawerHeaderComponent from './navDrawerHeader'
-
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
+import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
@@ -38,38 +36,26 @@ const sideList = (
     </List>
   </React.Fragment>
 )
-const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
-const NavDrawerComponent = ({ classes }) => {
+const NavDrawerComponent = ({ isDrawerOpen, toggleDrawer }) => {
   const sideBarContext = useContext(SideBarContext)
 
-  const toggleDrawer = () => {
-    sideBarContext.state.isDrawerOpen
-      ? sideBarContext.dispatch({ type: 'closeDrawer' })
-      : sideBarContext.dispatch({ type: 'openDrawer' })
+  const closeDrawer = () => {
+    sideBarContext.dispatch({ type: 'closeDrawer' })
   }
 
   return (
     <React.Fragment>
-      <SwipeableDrawer
-        anchor='left'
-        swipeAreaWidth={360}
-        open={sideBarContext.state.isDrawerOpen}
-        onOpen={toggleDrawer}
-        onClose={toggleDrawer}
-        disableBackdropTransition={!iOS}
-        disableDiscovery={iOS}
-      >
-        <NavDrawerHeaderComponent />
+      <Drawer open={sideBarContext.state.isDrawerOpen} onClose={closeDrawer}>
         <div
           tabIndex={0}
           role='button'
-          onClick={toggleDrawer}
-          onKeyDown={toggleDrawer}
+          onClick={closeDrawer}
+          onKeyDown={closeDrawer}
         >
           {sideList}
         </div>
-      </SwipeableDrawer>
+      </Drawer>
     </React.Fragment>
   )
 }

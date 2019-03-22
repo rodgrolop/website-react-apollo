@@ -1,73 +1,19 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { AppContext } from '../../../context'
 
-import Avatar from '@material-ui/core/Avatar'
-import MenuItem from '@material-ui/core/MenuItem'
-import Popover from '@material-ui/core/Popover'
-import IconButton from '@material-ui/core/IconButton'
+import NavBarRightAuthButtonsComponent from './navBarRightAuthButtons'
+import NavBarRightButtonsComponent from './navBarRightButtons'
 
-import AccountCircle from '@material-ui/icons/AccountCircle'
-import MailIcon from '@material-ui/icons/Mail'
-import NotificationsIcon from '@material-ui/icons/Notifications'
-import Badge from '@material-ui/core/Badge'
-
-const NavBarRightComponent = ({ classes }) => {
-  const appContext = useContext(AppContext)
-  const openAuthDialog = () => appContext.dispatch({ type: 'openAuthDialog' })
-
-  const [anchorEl, setDesktopMenuState] = useState(null)
-  const isMenuOpen = Boolean(anchorEl)
-
-  const toggleProfileMenu = event => {
-    setDesktopMenuState(isMenuOpen ? null : event.currentTarget)
-  }
-
+const NavBarRightComponent = ({ classes, ...props }) => {
+  const { me } = useContext(AppContext).state
   return (
     <React.Fragment>
-      {appContext.state.isUserAuth && (
-        <React.Fragment>
-          <IconButton>
-            <Badge badgeContent={4} color='secondary'>
-              <MailIcon className={classes.icon} />
-            </Badge>
-          </IconButton>
-          <IconButton>
-            <Badge badgeContent={6} color='secondary'>
-              <NotificationsIcon className={classes.icon} />
-            </Badge>
-          </IconButton>
-        </React.Fragment>
-      )}
-      <IconButton
-        aria-haspopup='true'
-        onClick={
-          appContext.state.isUserAuth ? toggleProfileMenu : openAuthDialog
-        }
-      >
-        {appContext.state.isUserAuth ? (
-          <Avatar
-            alt={appContext.state.user.username}
-            src={appContext.state.user.profilePicture}
-            className={classes.icon}
-          />
-        ) : (
-          <AccountCircle className={classes.icon} />
-        )}
-      </IconButton>
-      {appContext.state.isUserAuth && (
-        <Popover
-          anchorEl={anchorEl}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={isMenuOpen}
-          onClose={toggleProfileMenu}
-        >
-          <MenuItem onClick={null}>My Account</MenuItem>
-          <MenuItem onClick={toggleProfileMenu}>Log Out</MenuItem>
-        </Popover>
+      {me ? (
+        <NavBarRightAuthButtonsComponent me={me} />
+      ) : (
+        <NavBarRightButtonsComponent />
       )}
     </React.Fragment>
   )
 }
-
 export default NavBarRightComponent

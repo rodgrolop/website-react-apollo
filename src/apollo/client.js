@@ -2,6 +2,7 @@ import { ApolloClient } from 'apollo-client'
 import { getMainDefinition } from 'apollo-utilities'
 import { ApolloLink, split } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
+import { withClientState } from 'apollo-link-state'
 import { WebSocketLink } from 'apollo-link-ws'
 import { onError } from 'apollo-link-error'
 import { InMemoryCache } from 'apollo-cache-inmemory'
@@ -31,7 +32,7 @@ const authLink = new ApolloLink((operation, forward) => {
     const token = localStorage.getItem('token')
 
     if (token) {
-      headers = { ...headers, 'x-token': token }
+      headers = { ...headers, Authorization: 'Bearer ' + token }
     }
 
     return { headers }
@@ -62,10 +63,18 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 })
 
-const link = ApolloLink.from([authLink, errorLink, terminatingLink])
+const cache = new InMemoryCache()
+
+const stateLink = withClientState({
+  cache,
+  defaults: {},
+  resolvers: {}
+})
+
+const link = ApolloLink.from([authLink, errorLink, stateLink, terminatingLink])
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache,
   link
 })
 

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { AppContext } from '../../context'
+import { DialogContext } from '../../context'
 
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -13,8 +13,9 @@ import SignInFormComponent from './signInForm/'
 import SignUpFormComponent from './signUpForm/'
 
 const SignDialogComponent = ({ classes }) => {
-  const appContext = useContext(AppContext)
-  const closeAuthDialog = () => appContext.dispatch({ type: 'closeAuthDialog' })
+  const dialogContext = useContext(DialogContext)
+  const closeAuthDialog = () =>
+    dialogContext.dispatch({ type: 'toggleSignDialog' })
 
   const [tabValueState, setTabValueState] = useState(0)
   const changeTab = (event, value) => {
@@ -23,7 +24,7 @@ const SignDialogComponent = ({ classes }) => {
 
   return (
     <Dialog
-      open={appContext.state.showAuthDialog}
+      open={dialogContext.state.isSignDialogOpen}
       onClose={closeAuthDialog}
       aria-labelledby='form-dialog-title'
     >
