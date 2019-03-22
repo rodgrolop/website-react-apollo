@@ -10,7 +10,7 @@ const HeroPartial = ({ classes, heroProps, ...props }) => {
       <CardMedia
         image={heroProps.backGroundImage}
         title={heroProps.heroTitle}
-        className={classes.heroCard100}
+        className={classes.heroCard200}
       >
         <Grid
           container

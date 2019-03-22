@@ -9,6 +9,7 @@ import { RootSwitch } from '../../router'
 
 import NavBarComponent from '../navBar'
 import NavDrawerComponent from '../navDrawer'
+import { isNull } from 'util'
 
 const SignDialogComponent = lazy(() => import('../signDialog'))
 // const options= { fetchPolicy: 'cache-first' }
@@ -17,8 +18,9 @@ const PageContainerComponent = props => {
   const appContext = useContext(AppContext)
   const dialogContext = useContext(DialogContext)
   const { me } = appContext.state
+  console.log(me)
   const saveUserData = ({ data }) => {
-    !me && appContext.dispatch({ type: 'getMe', me: data.me })
+    me !== null && appContext.dispatch({ type: 'getMe', me: data.me })
   }
   return (
     <Query query={GET_ME} onCompleted={data => saveUserData({ data })}>

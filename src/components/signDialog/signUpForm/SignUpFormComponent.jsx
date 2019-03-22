@@ -1,14 +1,16 @@
 import React, { useContext, useState } from 'react'
-import { graphql, compose } from 'react-apollo'
-import { withApollo } from 'react-apollo'
-import gql from 'graphql-tag'
-import { AppContext } from '../../../context'
+import { Mutation } from 'react-apollo'
+import { AppContext, DialogContext } from '../../../context'
+
+import { REGISTER } from '../../../constants/mutations'
 
 // Layout MUI Components
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
+
 // Icons MUI Components
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Visibility from '@material-ui/icons/Visibility'
@@ -16,26 +18,19 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
 import Lock from '@material-ui/icons/Lock'
 
-const SIGN_IN = gql`
-  mutation($login: String!, $password: String!) {
-    login(login: $login, password: $password) {
-      token
-      user {
-        username
-        role
-      }
-    }
-  }
-`
 const initialInputsState = {
-  login: 'rodgrolop',
-  password: 'graphql',
-  showPassword: false
+  username: '',
+  email: '',
+  password: '',
+  showPassword: false,
+  loadingButton: false,
+  registerError: null
 }
 
 const SignUpFormComponent = ({ classes, ...props }) => {
   const [inputValues, setInputValues] = useState(initialInputsState)
   const appContext = useContext(AppContext)
+  const dialogContext = useContext(DialogContext)
 
   const updateField = event => {
     setInputValues({ ...inputValues, [event.target.name]: event.target.value })
@@ -43,99 +38,127 @@ const SignUpFormComponent = ({ classes, ...props }) => {
   const showPassword = () =>
     setInputValues({ ...inputValues, showPassword: !inputValues.showPassword })
 
-  const onSubmit = async () => {
-    const { login, password } = inputValues
-    await props
-      .loginMutation({
-        variables: { login, password }
-      })
-      .then(result => {
-        setInputValues({ ...inputValues, ...initialInputsState })
-        localStorage.setItem('token', result.data.login.token)
-        appContext.dispatch({ type: 'logInUser', user: result.data.login.user })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+  const saveUserData = data => {
+    setInputValues({ ...inputValues, ...initialInputsState })
+    localStorage.setItem('token', data.register.token)
+    appContext.dispatch({ type: 'logInUser', me: data.register.user })
+    dialogContext.dispatch({ type: 'toggleSignDialog' })
   }
 
+  const { username, email, password } = inputValues
+
   return (
-    <React.Fragment>
-      <Grid
-        container
-        spacing={8}
-        alignItems='flex-end'
-        justify='flex-start'
-        className={classes.gridContainer}
-      >
-        <Grid item>
-          <AccountCircle />
-        </Grid>
-        <Grid item className={classes.gridInput}>
-          <TextField
-            name='login'
-            type='text'
-            label='Email or Username'
-            value={inputValues.login}
-            onChange={updateField}
-            className={classes.input}
-          />
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        spacing={8}
-        alignItems='flex-end'
-        justify='flex-start'
-        className={classes.gridContainer}
-      >
-        <Grid item>
-          <Lock />
-        </Grid>
-        <Grid item className={classes.gridInput}>
-          <TextField
-            name='password'
-            type={inputValues.showPassword ? 'text' : 'password'}
-            label='Password'
-            value={inputValues.password}
-            onChange={updateField}
-            className={classes.input}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='Toggle password visibility'
-                    onClick={showPassword}
-                    className={classes.togglePasswordButton}
-                  >
-                    {inputValues.showPassword ? (
-                      <Visibility />
-                    ) : (
-                      <VisibilityOff />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-          />
-        </Grid>
-      </Grid>
-      <Grid container justify='center' className={classes.gridContainer}>
-        <Grid item>
-          <Button
-            type='submit'
-            variant='outlined'
-            color='primary'
-            onClick={() => onSubmit()}
+    <Mutation
+      mutation={REGISTER}
+      variables={{ username, email, password }}
+      onCompleted={data => saveUserData(data)}
+    >
+      {(registerMutation, { data, loading, error }) => (
+        <React.Fragment>
+          <Grid
+            container
+            spacing={8}
+            alignItems='flex-end'
+            justify='flex-start'
+            className={classes.gridContainer}
           >
-            Login
-          </Button>
-        </Grid>
-      </Grid>
-    </React.Fragment>
+            <Grid item>
+              <AccountCircle />
+            </Grid>
+            <Grid item className={classes.gridInput}>
+              <TextField
+                name='username'
+                type='text'
+                label='Username'
+                value={inputValues.username}
+                onChange={updateField}
+                className={classes.input}
+              />
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            spacing={8}
+            alignItems='flex-end'
+            justify='flex-start'
+            className={classes.gridContainer}
+          >
+            <Grid item>
+              <AccountCircle />
+            </Grid>
+            <Grid item className={classes.gridInput}>
+              <TextField
+                name='email'
+                type='text'
+                label='Email'
+                value={inputValues.email}
+                onChange={updateField}
+                className={classes.input}
+              />
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            spacing={8}
+            alignItems='flex-end'
+            justify='flex-start'
+            className={classes.gridContainer}
+          >
+            <Grid item>
+              <Lock />
+            </Grid>
+            <Grid item className={classes.gridInput}>
+              <TextField
+                name='password'
+                type={inputValues.showPassword ? 'text' : 'password'}
+                label='Password'
+                value={inputValues.password}
+                onChange={updateField}
+                className={classes.input}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        aria-label='Toggle password visibility'
+                        onClick={showPassword}
+                        className={classes.togglePasswordButton}
+                      >
+                        {inputValues.showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+              />
+            </Grid>
+          </Grid>
+          {error && (
+            <Grid container justify='center' className={classes.gridContainer}>
+              <Grid item>{error.message}</Grid>
+            </Grid>
+          )}
+          <Grid container justify='center' className={classes.gridContainer}>
+            <Grid item>
+              {loading ? (
+                <CircularProgress size={29} />
+              ) : (
+                <Button
+                  type='submit'
+                  variant='outlined'
+                  color='primary'
+                  onClick={registerMutation}
+                >
+                  Login
+                </Button>
+              )}
+            </Grid>
+          </Grid>
+        </React.Fragment>
+      )}
+    </Mutation>
   )
 }
-export default compose(
-  withApollo,
-  graphql(SIGN_IN, { name: 'loginMutation' })
-)(SignUpFormComponent)
+export default SignUpFormComponent

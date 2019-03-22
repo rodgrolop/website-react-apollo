@@ -1,4 +1,4 @@
 // import paths
-import { LOGIN } from './authMutations'
+import { LOGIN, REGISTER } from './authMutations'
 
-export { LOGIN }
+export { LOGIN, REGISTER }

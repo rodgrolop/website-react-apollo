@@ -5,8 +5,8 @@ export const styles = () => ({
   heroCard90: {
     height: '90vh'
   },
-  heroCard100: {
-    height: '100vh'
+  heroCard200: {
+    height: '200vh'
   },
   gridContainer: {
     flexGrow: 1,
