@@ -2,8 +2,7 @@ import React, { useReducer, createContext } from 'react'
 export const AppContext = createContext()
 
 const initialState = {
-  me: null,
-  showAuthDialog: false
+  me: null
 }
 
 const reducer = (state, action) => {
@@ -16,15 +15,10 @@ const reducer = (state, action) => {
     case 'logInUser':
       return {
         ...state,
-        me: action.me,
-        showAuthDialog: false
+        me: action.me
       }
     case 'logOutUser':
-      return { ...state, isUserAuth: false, me: null }
-    case 'openAuthDialog':
-      return { ...state, showAuthDialog: true }
-    case 'closeAuthDialog':
-      return { ...state, showAuthDialog: false }
+      return { ...state, me: null }
     default:
       return { initialState }
   }

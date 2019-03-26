@@ -53,7 +53,6 @@ const NavDrawerComponent = ({ classes }) => {
     <React.Fragment>
       <SwipeableDrawer
         anchor='left'
-        swipeAreaWidth={360}
         open={sideBarContext.state.isDrawerOpen}
         onOpen={toggleDrawer}
         onClose={toggleDrawer}

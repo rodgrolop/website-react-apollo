@@ -18,7 +18,6 @@ const LOGIN = gql`
       user {
         username
         role
-        profilePicture
       }
     }
   }
