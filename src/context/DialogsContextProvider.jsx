@@ -1,5 +1,5 @@
 import React, { useReducer, createContext } from 'react'
-export const DialogContext = createContext()
+export const DialogsContext = createContext()
 
 const initialState = {
   isSignDialogOpen: false
@@ -14,13 +14,13 @@ const reducer = (state, action) => {
   }
 }
 
-const DialogContextProvider = props => {
+const DialogsContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const value = { state, dispatch }
   return (
-    <DialogContext.Provider value={value}>
+    <DialogsContext.Provider value={value}>
       {props.children}
-    </DialogContext.Provider>
+    </DialogsContext.Provider>
   )
 }
-export default DialogContextProvider
+export default DialogsContextProvider

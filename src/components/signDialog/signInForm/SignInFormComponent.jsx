@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Mutation } from 'react-apollo'
-import { AppContext, DialogContext } from '../../../context'
+import { AppContext, DialogsContext } from '../../../context'
 
 import { LOGIN } from '../../../constants/mutations'
 
@@ -19,7 +19,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Lock from '@material-ui/icons/Lock'
 
 const initialInputsState = {
-  login: 'rodgrolop',
+  login: 'rodr',
   password: 'graphql',
   showPassword: false,
   loadingButton: false,
@@ -29,7 +29,7 @@ const initialInputsState = {
 const SignInFormComponent = ({ classes, ...props }) => {
   const [inputValues, setInputValues] = useState(initialInputsState)
   const appContext = useContext(AppContext)
-  const dialogContext = useContext(DialogContext)
+  const dialogsContext = useContext(DialogsContext)
 
   const updateField = event => {
     setInputValues({ ...inputValues, [event.target.name]: event.target.value })
@@ -41,7 +41,7 @@ const SignInFormComponent = ({ classes, ...props }) => {
     setInputValues({ ...inputValues, ...initialInputsState })
     localStorage.setItem('token', data.login.token)
     appContext.dispatch({ type: 'logInUser', me: data.login.user })
-    dialogContext.dispatch({ type: 'toggleSignDialog' })
+    dialogsContext.dispatch({ type: 'toggleSignDialog' })
   }
 
   const { login, password } = inputValues

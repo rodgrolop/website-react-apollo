@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
-import { DialogContext } from '../../../../context'
+import { DialogsContext } from '../../../../context'
 
 import IconButton from '@material-ui/core/IconButton'
 
 import AccountCircle from '@material-ui/icons/AccountCircle'
 const NavBarRightComponent = ({ classes }) => {
-  const dialogContext = useContext(DialogContext)
+  const dialogsContext = useContext(DialogsContext)
   const openAuthDialog = () =>
-    dialogContext.dispatch({ type: 'toggleSignDialog' })
+    dialogsContext.dispatch({ type: 'toggleSignDialog' })
 
   return (
     <React.Fragment>

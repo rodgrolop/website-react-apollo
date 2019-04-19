@@ -1,14 +1,16 @@
 // Context index
 import AppContextProvider, { AppContext } from './AppContextProvider'
-import DialogContextProvider, { DialogContext } from './DialogContextProvider'
+import DialogsContextProvider, {
+  DialogsContext
+} from './DialogsContextProvider'
 import SideBarContextProvider, {
   SideBarContext
 } from './SideBarContextProvider'
 export {
   AppContextProvider,
-  DialogContextProvider,
+  DialogsContextProvider,
   SideBarContextProvider,
   AppContext,
-  DialogContext,
+  DialogsContext,
   SideBarContext
 }

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Mutation } from 'react-apollo'
-import { AppContext, DialogContext } from '../../../context'
+import { AppContext, DialogsContext } from '../../../context'
 
 import { REGISTER } from '../../../constants/mutations'
 
@@ -30,7 +30,7 @@ const initialInputsState = {
 const SignUpFormComponent = ({ classes, ...props }) => {
   const [inputValues, setInputValues] = useState(initialInputsState)
   const appContext = useContext(AppContext)
-  const dialogContext = useContext(DialogContext)
+  const dialogsContext = useContext(DialogsContext)
 
   const updateField = event => {
     setInputValues({ ...inputValues, [event.target.name]: event.target.value })
@@ -42,7 +42,7 @@ const SignUpFormComponent = ({ classes, ...props }) => {
     setInputValues({ ...inputValues, ...initialInputsState })
     localStorage.setItem('token', data.register.token)
     appContext.dispatch({ type: 'logInUser', me: data.register.user })
-    dialogContext.dispatch({ type: 'toggleSignDialog' })
+    dialogsContext.dispatch({ type: 'toggleSignDialog' })
   }
 
   const { username, email, password } = inputValues

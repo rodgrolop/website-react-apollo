@@ -4,7 +4,7 @@ import React from 'react'
 import {
   AppContextProvider,
   SideBarContextProvider,
-  DialogContextProvider
+  DialogsContextProvider
 } from '../../context'
 
 // Theme provider
@@ -21,7 +21,7 @@ import PageContainerComponent from '../pageContainer'
 
 const RootComponent = () => (
   <AppContextProvider>
-    <DialogContextProvider>
+    <DialogsContextProvider>
       <SideBarContextProvider>
         <ThemeProviderComponent>
           <ApolloProviderComponent>
@@ -31,7 +31,7 @@ const RootComponent = () => (
           </ApolloProviderComponent>
         </ThemeProviderComponent>
       </SideBarContextProvider>
-    </DialogContextProvider>
+    </DialogsContextProvider>
   </AppContextProvider>
 )
 

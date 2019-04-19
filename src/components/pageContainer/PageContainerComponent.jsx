@@ -1,5 +1,5 @@
-import React, { useContext, Suspense, lazy } from 'react'
-import { AppContext, DialogContext } from '../../context'
+import React, { useContext } from 'react'
+import { AppContext } from '../../context'
 
 import { Query } from 'react-apollo'
 import { GET_ME } from '../../constants/queries'
@@ -9,17 +9,13 @@ import { RootSwitch } from '../../router'
 
 import NavBarComponent from '../navBar'
 import NavDrawerComponent from '../navDrawer'
-
-const SignDialogComponent = lazy(() => import('../signDialog'))
-// const options= { fetchPolicy: 'cache-first' }
+import LazyDialogsComponent from '../lazyDialogs'
 
 const PageContainerComponent = props => {
   const appContext = useContext(AppContext)
-  const dialogContext = useContext(DialogContext)
   const { me } = appContext.state
-
+  console.log(me)
   const saveUserData = data => {
-    console.log(data)
     if (!me || me === null) {
       appContext.dispatch({ type: 'getMe', me: data.me })
     }
@@ -32,11 +28,7 @@ const PageContainerComponent = props => {
             <NavBarComponent />
             <NavDrawerComponent />
             <RootSwitch />
-            {dialogContext.state.isSignDialogOpen && (
-              <Suspense fallback={null}>
-                <SignDialogComponent />
-              </Suspense>
-            )}
+            <LazyDialogsComponent />
           </React.Fragment>
         )
       }}
