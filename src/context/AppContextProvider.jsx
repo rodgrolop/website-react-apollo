@@ -7,11 +7,6 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'getMe':
-      return {
-        ...state,
-        me: action.me
-      }
     case 'logInUser':
       return {
         ...state,

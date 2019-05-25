@@ -11,5 +11,10 @@ export const styles = () => ({
       'linear-gradient(to top, rgba(256,256,256,0.7) 0%, ' +
       'rgba(256,256,256,0.3) 70%, rgba(256,256,256,0) 100%)'
   },
-  cardHeader: { height: 'auto' }
+  cardHeader: { height: 'auto' },
+  iconAvatar: {
+    color: 'white',
+    backgroundColor: '#f50057',
+    textTransform: 'uppercase'
+  }
 })

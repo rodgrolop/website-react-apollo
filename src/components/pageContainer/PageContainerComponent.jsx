@@ -14,10 +14,9 @@ import LazyDialogsComponent from '../lazyDialogs'
 const PageContainerComponent = props => {
   const appContext = useContext(AppContext)
   const { me } = appContext.state
-  console.log(me)
   const saveUserData = data => {
     if (!me || me === null) {
-      appContext.dispatch({ type: 'getMe', me: data.me })
+      appContext.dispatch({ type: 'logInUser', me: data.me })
     }
   }
   return (

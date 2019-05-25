@@ -7,18 +7,11 @@ import IconButton from '@material-ui/core/IconButton'
 
 import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
-import Badge from '@material-ui/core/Badge'
 
 const NavBarRightAuthButtonsComponent = ({ classes, me }) => {
   const [anchorEl, setDesktopMenuState] = useState(null)
   const isMenuOpen = Boolean(anchorEl)
-  const { profile } = { me }
-  var profilePicture
-  if (profile) {
-    profilePicture = profile.profilePicture
-  } else {
-    profilePicture = ''
-  }
+
   const toggleProfileMenu = event => {
     setDesktopMenuState(isMenuOpen ? null : event.currentTarget)
   }
@@ -37,10 +30,10 @@ const NavBarRightAuthButtonsComponent = ({ classes, me }) => {
       <IconButton aria-haspopup='true' onClick={toggleProfileMenu}>
         <Avatar
           alt={me.username}
-          src={profilePicture}
+          src={me.profilePicture}
           className={classes.iconAvatar}
         >
-          {me.username.charAt(0)}
+          {me.profilePicture === null && me.username.charAt(0)}
         </Avatar>
       </IconButton>
       <Popover

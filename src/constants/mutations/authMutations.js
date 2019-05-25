@@ -7,6 +7,7 @@ const REGISTER = gql`
       user {
         username
         role
+        profilePicture
       }
     }
   }
@@ -18,6 +19,7 @@ const LOGIN = gql`
       user {
         username
         role
+        profilePicture
       }
     }
   }

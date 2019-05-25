@@ -28,7 +28,15 @@ const NavDrawerHeaderComponent = ({ classes }) => {
             className={classes.cardMediaGrid}
           >
             <CardHeader
-              avatar={<Avatar alt={me.username} src={me.profilePicture} />}
+              avatar={
+                <Avatar
+                  alt={me.username}
+                  src={me.profilePicture}
+                  className={classes.iconAvatar}
+                >
+                  {me.profilePicture === null && me.username.charAt(0)}
+                </Avatar>
+              }
               title={me.username}
               subheader=''
               className={classes.cardHeader}

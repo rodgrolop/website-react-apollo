@@ -19,8 +19,8 @@ import IconButton from '@material-ui/core/IconButton'
 import Lock from '@material-ui/icons/Lock'
 
 const initialInputsState = {
-  login: 'rodr',
-  password: 'graphql',
+  login: 'juan ',
+  password: 'juan',
   showPassword: false,
   loadingButton: false,
   loginError: null
