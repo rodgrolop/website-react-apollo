@@ -8,5 +8,9 @@ export const styles = () => ({
     backgroundColor: '#212121',
     boxShadow:
       '0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(33, 33, 33, 0.46)'
+  },
+  logo: {
+    height: '44px',
+    margin: '10px 0 10px 30px'
   }
 })

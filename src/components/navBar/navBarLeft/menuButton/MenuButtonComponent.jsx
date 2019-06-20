@@ -5,7 +5,7 @@ import { SideBarContext } from '../../../../context'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 
-const MenuButtonComponent = () => {
+const MenuButtonComponent = ({ classes }) => {
   const { dispatch } = useContext(SideBarContext)
 
   const openDrawer = () => {
@@ -14,7 +14,7 @@ const MenuButtonComponent = () => {
 
   return (
     <IconButton color='inherit' onClick={openDrawer}>
-      <MenuIcon />
+      <MenuIcon className={classes.menuIcon} />
     </IconButton>
   )
 }

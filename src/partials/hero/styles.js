@@ -6,7 +6,7 @@ export const styles = () => ({
     height: '90vh'
   },
   heroCard200: {
-    height: '200vh'
+    height: '100vh'
   },
   gridContainer: {
     flexGrow: 1,
@@ -15,7 +15,11 @@ export const styles = () => ({
   gridItem: {},
   heroTitle: {
     color: '#fff',
-    margin: '1rem 0'
+    margin: 'auto',
+    textAlign: 'center',
+    fontSize: '15rem',
+    fontWeight: '700',
+    opacity: '0.5'
   },
   heroSubtitle: {
     color: '#fff',

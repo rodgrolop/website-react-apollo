@@ -21,7 +21,11 @@ const HeroPartial = ({ classes, heroProps, ...props }) => {
         >
           {heroProps.heroTitle && (
             <Grid item className={classes.gridItem} xs={12} sm={10}>
-              <Typography className={classes.heroTitle} variant='h1'>
+              <Typography
+                className={classes.heroTitle}
+                variant='h1'
+                size='48px'
+              >
                 {heroProps.heroTitle}
               </Typography>
             </Grid>
