@@ -1,29 +1,29 @@
 import React, { useReducer, createContext } from 'react'
-export const AppContext = createContext()
+export const ProfileContext = createContext()
 
 const initialState = {
-  auth: false
+  profile: null
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'logInUser':
+    case 'setProfile':
       return {
         ...state,
-        auth: action.auth
+        profile: action.profile
       }
-    case 'logOutUser':
-      return { ...state, auth: false }
     default:
       return { initialState }
   }
 }
 
-const AppContextProvider = props => {
+const ProfileContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const value = { state, dispatch }
   return (
-    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
+    <ProfileContext.Provider value={value}>
+      {props.children}
+    </ProfileContext.Provider>
   )
 }
-export default AppContextProvider
+export default ProfileContextProvider

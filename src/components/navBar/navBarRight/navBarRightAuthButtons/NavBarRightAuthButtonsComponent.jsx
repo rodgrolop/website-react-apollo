@@ -8,12 +8,18 @@ import IconButton from '@material-ui/core/IconButton'
 import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 
-const NavBarRightAuthButtonsComponent = ({ classes, me }) => {
-  const [anchorEl, setDesktopMenuState] = useState(null)
-  const isMenuOpen = Boolean(anchorEl)
+const initialState = {
+  anchorEl: null
+}
+
+const NavBarRightAuthButtonsComponent = ({ classes, profile }) => {
+  const [state, setState] = useState({ ...initialState })
+  const isMenuOpen = Boolean(state.anchorEl)
 
   const toggleProfileMenu = event => {
-    setDesktopMenuState(isMenuOpen ? null : event.currentTarget)
+    setState(
+      isMenuOpen ? { anchorEl: null } : { anchorEl: event.currentTarget }
+    )
   }
   return (
     <React.Fragment>
@@ -29,15 +35,16 @@ const NavBarRightAuthButtonsComponent = ({ classes, me }) => {
       </IconButton>
       <IconButton aria-haspopup='true' onClick={toggleProfileMenu}>
         <Avatar
-          alt={me.username}
-          src={me.profilePicture}
+          // alt={profile.user.username}
+          // src={profile.profilePicture}
           className={classes.iconAvatar}
         >
-          {me.profilePicture === null && me.username.charAt(0)}
+          {/* {profile.profilePicture === null &&
+                  profile.user.username.charAt(0)} */}
         </Avatar>
       </IconButton>
       <Popover
-        anchorEl={anchorEl}
+        anchorEl={state.anchorEl}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={isMenuOpen}

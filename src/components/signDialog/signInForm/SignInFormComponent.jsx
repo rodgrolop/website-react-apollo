@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Mutation } from 'react-apollo'
-import { AppContext, DialogsContext } from '../../../context'
+import { AppContext, ProfileContext, DialogsContext } from '../../../context'
 
 import { LOGIN } from '../../../constants/mutations'
 
@@ -19,7 +19,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Lock from '@material-ui/icons/Lock'
 
 const initialInputsState = {
-  login: 'juan ',
+  login: 'juan',
   password: 'juan',
   showPassword: false,
   loadingButton: false,
@@ -29,6 +29,7 @@ const initialInputsState = {
 const SignInFormComponent = ({ classes, ...props }) => {
   const [inputValues, setInputValues] = useState(initialInputsState)
   const appContext = useContext(AppContext)
+  const profileContext = useContext(ProfileContext)
   const dialogsContext = useContext(DialogsContext)
 
   const updateField = event => {
@@ -40,7 +41,8 @@ const SignInFormComponent = ({ classes, ...props }) => {
   const saveUserData = data => {
     setInputValues({ ...inputValues, ...initialInputsState })
     localStorage.setItem('token', data.login.token)
-    appContext.dispatch({ type: 'logInUser', me: data.login.user })
+    appContext.dispatch({ type: 'logInUser', auth: true })
+    profileContext.dispatch({ type: 'setProfile', profile: data.login.profile })
     dialogsContext.dispatch({ type: 'toggleSignDialog' })
   }
 
@@ -56,13 +58,13 @@ const SignInFormComponent = ({ classes, ...props }) => {
         <React.Fragment>
           <Grid
             container
-            spacing={8}
+            spacing={2}
             alignItems='flex-end'
             justify='flex-start'
             className={classes.gridContainer}
           >
             <Grid item>
-              <AccountCircle />
+              <AccountCircle className={classes.icon} />
             </Grid>
             <Grid item className={classes.gridInput}>
               <TextField
@@ -77,13 +79,13 @@ const SignInFormComponent = ({ classes, ...props }) => {
           </Grid>
           <Grid
             container
-            spacing={8}
+            spacing={2}
             alignItems='flex-end'
             justify='flex-start'
             className={classes.gridContainer}
           >
             <Grid item>
-              <Lock />
+              <Lock className={classes.icon} />
             </Grid>
             <Grid item className={classes.gridInput}>
               <TextField
@@ -102,9 +104,9 @@ const SignInFormComponent = ({ classes, ...props }) => {
                         className={classes.togglePasswordButton}
                       >
                         {inputValues.showPassword ? (
-                          <Visibility />
+                          <Visibility className={classes.icon} />
                         ) : (
-                          <VisibilityOff />
+                          <VisibilityOff className={classes.icon} />
                         )}
                       </IconButton>
                     </InputAdornment>

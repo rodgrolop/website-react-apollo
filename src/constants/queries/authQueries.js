@@ -5,7 +5,11 @@ const GET_ME = gql`
     me {
       username
       role
-      profilePicture
+      profile {
+        firstName
+        lastName
+        profilePicture
+      }
     }
   }
 `

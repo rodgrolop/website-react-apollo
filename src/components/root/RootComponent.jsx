@@ -3,6 +3,7 @@ import React from 'react'
 // Context
 import {
   AppContextProvider,
+  ProfileContextProvider,
   SideBarContextProvider,
   DialogsContextProvider
 } from '../../context'
@@ -21,17 +22,19 @@ import PageContainerComponent from '../pageContainer'
 
 const RootComponent = () => (
   <AppContextProvider>
-    <DialogsContextProvider>
-      <SideBarContextProvider>
-        <ThemeProviderComponent>
-          <ApolloProviderComponent>
-            <RootRouter>
-              <PageContainerComponent />
-            </RootRouter>
-          </ApolloProviderComponent>
-        </ThemeProviderComponent>
-      </SideBarContextProvider>
-    </DialogsContextProvider>
+    <ProfileContextProvider>
+      <DialogsContextProvider>
+        <SideBarContextProvider>
+          <ThemeProviderComponent>
+            <ApolloProviderComponent>
+              <RootRouter>
+                <PageContainerComponent />
+              </RootRouter>
+            </ApolloProviderComponent>
+          </ThemeProviderComponent>
+        </SideBarContextProvider>
+      </DialogsContextProvider>
+    </ProfileContextProvider>
   </AppContextProvider>
 )
 

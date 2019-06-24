@@ -1,7 +1,7 @@
 export const styles = () => ({
   icon: {
     color: 'white',
-    height: '22px',
-    width: '22px'
+    height: '24px',
+    width: '24px'
   }
 })
