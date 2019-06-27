@@ -4,7 +4,8 @@ import clsx from 'clsx'
 
 import { SideBarContext } from '../../../context/SideBarContextProvider'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
@@ -13,6 +14,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
+
+const useStyles = makeStyles(styles)
 
 const NavDrawerContentComponent = () => {
   const sideBarContext = useContext(SideBarContext)

@@ -4,7 +4,8 @@ import { Mutation } from 'react-apollo'
 
 import { AppContext, DialogsContext } from '../../../context'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import { REGISTER } from '../../../constants/mutations'
 
@@ -21,6 +22,8 @@ import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
 import Lock from '@material-ui/icons/Lock'
+
+const useStyles = makeStyles(styles)
 
 const initialInputsState = {
   username: '',

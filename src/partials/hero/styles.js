@@ -1,5 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
-export const useStyles = makeStyles(theme => ({
+export const styles = {
   HeroFullHeight: {
     height: '200vh'
   },
@@ -12,11 +11,11 @@ export const useStyles = makeStyles(theme => ({
     margin: 'auto',
     textAlign: 'center',
     fontSize: '1rem',
-    fontWeight: '700',
-    opacity: '0.5'
+    fontWeight: 700,
+    opacity: 0.5
   },
   heroSubtitle: {
     color: '#fff',
     fontSize: '1.5rem'
   }
-}))
+}

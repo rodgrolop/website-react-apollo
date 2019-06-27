@@ -1,6 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
-export const useStyles = makeStyles(theme => ({
+export const styles = {
   menuIcon: {
-    fontSize: '24px'
+    fontSize: 24
   }
-}))
+}

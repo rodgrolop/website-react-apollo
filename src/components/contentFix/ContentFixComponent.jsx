@@ -2,9 +2,12 @@ import React, { useContext } from 'react'
 
 import clsx from 'clsx'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import { SideBarContext } from '../../context/SideBarContextProvider'
+
+const useStyles = makeStyles(styles)
 
 const ContentFixComponent = props => {
   const { isDrawerOpen, drawerPersistent, miniDrawer } = useContext(

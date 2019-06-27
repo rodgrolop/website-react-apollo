@@ -1,10 +1,13 @@
 import React from 'react'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import CardMedia from '@material-ui/core/CardMedia'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+
+const useStyles = makeStyles(styles)
 
 const HeroPartial = ({ heroProps, ...props }) => {
   const classes = useStyles()

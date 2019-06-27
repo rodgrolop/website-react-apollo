@@ -2,10 +2,13 @@ import React, { useContext } from 'react'
 
 import { DialogsContext } from '../../../../context'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import IconButton from '@material-ui/core/IconButton'
 import AccountCircle from '@material-ui/icons/AccountCircle'
+
+const useStyles = makeStyles(styles)
 
 const NavBarRightComponent = () => {
   const dialogsContext = useContext(DialogsContext)

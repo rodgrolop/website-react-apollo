@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -10,6 +11,8 @@ import NavBarRightComponent from './navBarRight'
 import NavBarLeftComponent from './navBarLeft'
 
 import { ReactComponent as Logo } from '../../assets/svg/Caffeine_logo.svg'
+
+const useStyles = makeStyles(styles)
 
 function ElevationScroll(props) {
   const { children } = props
@@ -25,6 +28,7 @@ function ElevationScroll(props) {
 
 const NavBarComponent = props => {
   const classes = useStyles()
+
   return (
     <ElevationScroll {...props}>
       <AppBar variant='regular' className={classes.appBar}>

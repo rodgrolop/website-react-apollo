@@ -42,32 +42,20 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontSize: 12
   },
+  // Drawer widths
   drawerWidth: 240,
   drawerWidthMini: 40,
+  // Drawer transition timings
+  contentMarginEaseIn: 350,
+  contentMarginEaseOut: 225,
+  drawerWidthEaseIn: 225,
+  drawerWidthEaseOut: 350,
+  // Overrides
   overrides: {
     // General overrides
-    MuiSvgIcon: {
-      root: {
-        color: 'white',
-        height: 24,
-        width: 24
-      }
-    },
     // NavBar overrides
     // NavBarLeft overrides
     // NavBarRight overrides
-    MuiAvatar: {
-      root: {
-        height: 32,
-        width: 32,
-        fontSize: '1rem',
-        textTransform: 'uppercase'
-      },
-      colorDefault: {
-        color: 'white',
-        backgroundColor: '#f50057'
-      }
-    }
   }
 })
 

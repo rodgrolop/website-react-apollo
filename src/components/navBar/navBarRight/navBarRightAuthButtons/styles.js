@@ -1,5 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
-export const useStyles = makeStyles(theme => ({
+export const styles = {
   icon: {
     color: 'white',
     height: 24,
@@ -16,4 +15,4 @@ export const useStyles = makeStyles(theme => ({
     backgroundColor: '#f50057',
     textTransform: 'uppercase'
   }
-}))
+}

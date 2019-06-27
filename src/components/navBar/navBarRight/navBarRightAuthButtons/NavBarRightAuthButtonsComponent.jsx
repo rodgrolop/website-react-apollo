@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import Avatar from '@material-ui/core/Avatar'
 import MenuItem from '@material-ui/core/MenuItem'
 import Popover from '@material-ui/core/Popover'
 import IconButton from '@material-ui/core/IconButton'
+import Badge from '@material-ui/core/Badge'
 
 import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
+
+const useStyles = makeStyles(styles)
 
 const initialState = {
   anchorEl: null
@@ -29,14 +33,14 @@ const NavBarRightAuthButtonsComponent = profile => {
   return (
     <React.Fragment>
       <IconButton>
-        {/* <Badge badgeContent={4} color='secondary'> */}
-        <MailIcon className={classes.icon} />
-        {/* </Badge> */}
+        <Badge badgeContent={4} color='secondary'>
+          <MailIcon className={classes.icon} />
+        </Badge>
       </IconButton>
       <IconButton>
-        {/* <Badge badgeContent={6} color='secondary'> */}
-        <NotificationsIcon className={classes.icon} />
-        {/* </Badge> */}
+        <Badge badgeContent={6} color='secondary'>
+          <NotificationsIcon className={classes.icon} />
+        </Badge>
       </IconButton>
       <IconButton
         aria-haspopup='true'
@@ -60,7 +64,7 @@ const NavBarRightAuthButtonsComponent = profile => {
         open={isMenuOpen}
         onClose={toggleProfileMenu}
       >
-        <MenuItem onClick={null}>My Account</MenuItem>
+        <MenuItem onClick={toggleProfileMenu}>My Account</MenuItem>
         <MenuItem onClick={toggleProfileMenu}>Log Out</MenuItem>
       </Popover>
     </React.Fragment>

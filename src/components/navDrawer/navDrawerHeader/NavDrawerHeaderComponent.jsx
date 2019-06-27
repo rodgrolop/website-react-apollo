@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 
 import { UserContext } from '../../../context'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -13,12 +14,14 @@ import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
-const NavDrawerHeaderComponent = () => {
-  const { me } = useContext(UserContext).state
-  const classes = useStyles()
-  console.log(useContext(UserContext).state)
+const useStyles = makeStyles(styles)
 
-  return me ? (
+const NavDrawerHeaderComponent = () => {
+  const { isAuth, username, profile } = useContext(UserContext).state
+
+  const classes = useStyles()
+
+  return isAuth ? (
     <React.Fragment>
       <Card className={classes.cardDrawer}>
         <CardMedia
@@ -36,14 +39,14 @@ const NavDrawerHeaderComponent = () => {
             <CardHeader
               avatar={
                 <Avatar
-                  alt={me.username}
-                  src={me.profilePicture}
+                  alt={username}
+                  src={profile.profilePicture}
                   className={classes.iconAvatar}
                 >
-                  {me.profilePicture === null && me.username.charAt(0)}
+                  {profile.profilePicture === null && username.charAt(0)}
                 </Avatar>
               }
-              title={me.username}
+              title={username}
               subheader=''
               className={classes.cardHeader}
               action={

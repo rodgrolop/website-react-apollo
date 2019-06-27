@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react'
 
 import { DialogsContext } from '../../context'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -14,6 +15,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 
 import SignInFormComponent from './signInForm/'
 import SignUpFormComponent from './signUpForm/'
+
+const useStyles = makeStyles(styles)
 
 const SignDialogComponent = () => {
   const dialogsContext = useContext(DialogsContext)

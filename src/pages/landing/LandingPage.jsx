@@ -1,11 +1,14 @@
 import React from 'react'
 
-import { useStyles } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { styles } from './styles'
 
 import HeroFullHeight from '../../partials/hero'
 
 // Assets
 import heroImage from '../../assets/images/hero/LandingHero.jpeg'
+
+const useStyles = makeStyles(styles)
 
 const heroProps = {
   heroTitle: 'Landing Page',

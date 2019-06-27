@@ -1,5 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
-export const useStyles = makeStyles(theme => ({
+export const styles = {
   gridContainer: {
     width: '100%',
     margin: '10px 0'
@@ -11,7 +10,7 @@ export const useStyles = makeStyles(theme => ({
     width: '100%'
   },
   icon: {
-    height: '24px',
-    width: '24px'
+    height: 24,
+    width: 24
   }
-}))
+}

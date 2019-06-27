@@ -1,5 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
-export const useStyles = makeStyles(theme => ({
+export const styles = {
   cardDrawer: {
     borderRadius: 0,
     boxShadow: 'none',
@@ -18,4 +17,4 @@ export const useStyles = makeStyles(theme => ({
     backgroundColor: '#f50057',
     textTransform: 'uppercase'
   }
-}))
+}

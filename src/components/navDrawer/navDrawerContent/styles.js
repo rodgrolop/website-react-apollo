@@ -1,6 +1,18 @@
-import { makeStyles } from '@material-ui/core/styles'
-export const useStyles = makeStyles(theme => ({
+import theme from '../../../theme/theme'
+export const styles = {
   navDrawerContent: {},
-  navDrawerContentWide: { width: theme.drawerWidth },
-  navDrawerContentMini: { width: theme.drawerWidthMini }
-}))
+  navDrawerContentWide: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.drawerWidthEaseIn
+    }),
+    width: theme.drawerWidth
+  },
+  navDrawerContentMini: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.drawerWidthEaseOut
+    }),
+    width: theme.drawerWidthMini
+  }
+}
