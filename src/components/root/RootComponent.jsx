@@ -1,9 +1,12 @@
 import React from 'react'
 
+// Normalize library from MUI
+import CssBaseline from '@material-ui/core/CssBaseline'
+
 // Context
 import {
   AppContextProvider,
-  ProfileContextProvider,
+  UserContextProvider,
   SideBarContextProvider,
   DialogsContextProvider
 } from '../../context'
@@ -22,19 +25,20 @@ import PageContainerComponent from '../pageContainer'
 
 const RootComponent = () => (
   <AppContextProvider>
-    <ProfileContextProvider>
+    <UserContextProvider>
       <DialogsContextProvider>
         <SideBarContextProvider>
           <ThemeProviderComponent>
             <ApolloProviderComponent>
               <RootRouter>
+                <CssBaseline />
                 <PageContainerComponent />
               </RootRouter>
             </ApolloProviderComponent>
           </ThemeProviderComponent>
         </SideBarContextProvider>
       </DialogsContextProvider>
-    </ProfileContextProvider>
+    </UserContextProvider>
   </AppContextProvider>
 )
 

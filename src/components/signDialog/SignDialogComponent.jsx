@@ -1,5 +1,8 @@
 import React, { useContext, useState } from 'react'
+
 import { DialogsContext } from '../../context'
+
+import { useStyles } from './styles'
 
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -12,12 +15,16 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import SignInFormComponent from './signInForm/'
 import SignUpFormComponent from './signUpForm/'
 
-const SignDialogComponent = ({ classes }) => {
+const SignDialogComponent = () => {
   const dialogsContext = useContext(DialogsContext)
+
+  const classes = useStyles()
+
   const closeAuthDialog = () =>
     dialogsContext.dispatch({ type: 'toggleSignDialog' })
 
   const [tabValueState, setTabValueState] = useState(0)
+
   const changeTab = (event, value) => {
     setTabValueState(value)
   }

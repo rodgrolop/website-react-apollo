@@ -3,71 +3,62 @@ import React, { useContext } from 'react'
 import { SideBarContext } from '../../context/SideBarContextProvider'
 
 import NavDrawerHeaderComponent from './navDrawerHeader'
+import NavDrawerContentComponent from './navDrawerContent'
+
+import { useTheme } from '@material-ui/core/styles'
+import { useStyles } from './styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import List from '@material-ui/core/List'
-import Divider from '@material-ui/core/Divider'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import MailIcon from '@material-ui/icons/Mail'
+import IconButton from '@material-ui/core/IconButton'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
-const sideList = (
-  <React.Fragment>
-    <List>
-      {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-        <ListItem button key={text}>
-          <ListItemIcon>
-            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-          </ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItem>
-      ))}
-    </List>
-    <Divider />
-    <List>
-      {['All mail', 'Trash', 'Spam'].map((text, index) => (
-        <ListItem button key={text}>
-          <ListItemIcon>
-            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-          </ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItem>
-      ))}
-    </List>
-  </React.Fragment>
-)
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
-const NavDrawerComponent = ({ classes }) => {
+const NavDrawerComponent = () => {
   const sideBarContext = useContext(SideBarContext)
+  const { isDrawerOpen, drawerPersistent, miniDrawer } = sideBarContext.state
 
   const toggleDrawer = () => {
-    sideBarContext.state.isDrawerOpen
+    isDrawerOpen
       ? sideBarContext.dispatch({ type: 'closeDrawer' })
       : sideBarContext.dispatch({ type: 'openDrawer' })
   }
+
+  const setPersistentDrawer = () =>
+    !drawerPersistent &&
+    sideBarContext.dispatch({ type: 'setPersistentDrawer' })
+
+  const setTemporaryDrawer = () =>
+    drawerPersistent && sideBarContext.dispatch({ type: 'setTemporaryDrawer' })
+
+  const setMiniDrawer = () =>
+    drawerPersistent &&
+    !miniDrawer &&
+    sideBarContext.dispatch({ type: 'setMiniDrawer' })
+
+  const theme = useTheme()
+  const classes = useStyles()
+  const matches = useMediaQuery(theme.breakpoints.up('sm'))
+
+  matches ? setPersistentDrawer() : setTemporaryDrawer()
 
   return (
     <React.Fragment>
       <SwipeableDrawer
         anchor='left'
-        open={sideBarContext.state.isDrawerOpen}
+        variant={matches ? 'persistent' : 'temporary'}
+        open={isDrawerOpen}
         onOpen={toggleDrawer}
         onClose={toggleDrawer}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
       >
         <NavDrawerHeaderComponent />
-        <div
-          tabIndex={0}
-          role='button'
-          onClick={toggleDrawer}
-          onKeyDown={toggleDrawer}
-        >
-          {sideList}
-        </div>
+        <IconButton onClick={setMiniDrawer}>
+          <ChevronLeftIcon />
+        </IconButton>
+        <NavDrawerContentComponent />
       </SwipeableDrawer>
     </React.Fragment>
   )

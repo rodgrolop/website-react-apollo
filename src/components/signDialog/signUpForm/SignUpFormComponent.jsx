@@ -1,6 +1,10 @@
 import React, { useContext, useState } from 'react'
+
 import { Mutation } from 'react-apollo'
+
 import { AppContext, DialogsContext } from '../../../context'
+
+import { useStyles } from './styles'
 
 import { REGISTER } from '../../../constants/mutations'
 
@@ -27,10 +31,13 @@ const initialInputsState = {
   registerError: null
 }
 
-const SignUpFormComponent = ({ classes, ...props }) => {
+const SignUpFormComponent = props => {
   const [inputValues, setInputValues] = useState(initialInputsState)
+
   const appContext = useContext(AppContext)
   const dialogsContext = useContext(DialogsContext)
+
+  const classes = useStyles()
 
   const updateField = event => {
     setInputValues({ ...inputValues, [event.target.name]: event.target.value })

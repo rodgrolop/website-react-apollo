@@ -1,5 +1,8 @@
 import React, { useContext } from 'react'
-import { AppContext } from '../../../context'
+
+import { UserContext } from '../../../context'
+
+import { useStyles } from './styles'
 
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -10,8 +13,11 @@ import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
-const NavDrawerHeaderComponent = ({ classes }) => {
-  const { me } = useContext(AppContext).state
+const NavDrawerHeaderComponent = () => {
+  const { me } = useContext(UserContext).state
+  const classes = useStyles()
+  console.log(useContext(UserContext).state)
+
   return me ? (
     <React.Fragment>
       <Card className={classes.cardDrawer}>

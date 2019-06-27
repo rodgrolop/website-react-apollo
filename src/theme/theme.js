@@ -42,8 +42,32 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontSize: 12
   },
+  drawerWidth: 240,
+  drawerWidthMini: 40,
   overrides: {
-    MuiIconButton: {}
+    // General overrides
+    MuiSvgIcon: {
+      root: {
+        color: 'white',
+        height: 24,
+        width: 24
+      }
+    },
+    // NavBar overrides
+    // NavBarLeft overrides
+    // NavBarRight overrides
+    MuiAvatar: {
+      root: {
+        height: 32,
+        width: 32,
+        fontSize: '1rem',
+        textTransform: 'uppercase'
+      },
+      colorDefault: {
+        color: 'white',
+        backgroundColor: '#f50057'
+      }
+    }
   }
 })
 

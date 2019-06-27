@@ -7,6 +7,11 @@ const REGISTER = gql`
       user {
         username
         role
+        profile {
+          firstName
+          lastName
+          profilePicture
+        }
       }
     }
   }
@@ -18,6 +23,11 @@ const LOGIN = gql`
       user {
         username
         role
+        profile {
+          firstName
+          lastName
+          profilePicture
+        }
       }
     }
   }

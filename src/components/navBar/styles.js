@@ -1,16 +1,18 @@
-export const styles = () => ({
+import { makeStyles } from '@material-ui/core/styles'
+export const useStyles = makeStyles(theme => ({
   grow: { flexGrow: 1 },
-  transparent: {
-    backgroundColor: 'transparent',
-    boxShadow: 'none'
-  },
-  solid: {
-    backgroundColor: '#212121',
-    boxShadow:
-      '0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(33, 33, 33, 0.46)'
+  appBar: {},
+  toolBar: {
+    minHeight: '48px'
   },
   logo: {
-    height: '44px',
-    margin: '10px 0 10px 30px'
+    height: '36px',
+    margin: '6px 0 6px 18px'
+  },
+  pageTitle: {
+    fontSize: '22px',
+    marginLeft: '12px',
+    color: '#eee',
+    fontWeight: '500'
   }
-})
+}))

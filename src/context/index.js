@@ -6,16 +6,14 @@ import DialogsContextProvider, {
 import SideBarContextProvider, {
   SideBarContext
 } from './SideBarContextProvider'
-import ProfileContextProvider, {
-  ProfileContext
-} from './ProfileContextProvider'
+import UserContextProvider, { UserContext } from './UserContextProvider'
 export {
   AppContextProvider,
-  ProfileContextProvider,
+  UserContextProvider,
   DialogsContextProvider,
   SideBarContextProvider,
   AppContext,
-  ProfileContext,
+  UserContext,
   DialogsContext,
   SideBarContext
 }

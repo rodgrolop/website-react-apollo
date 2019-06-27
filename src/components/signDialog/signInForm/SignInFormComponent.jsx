@@ -1,6 +1,10 @@
 import React, { useContext, useState } from 'react'
+
 import { Mutation } from 'react-apollo'
-import { AppContext, ProfileContext, DialogsContext } from '../../../context'
+
+import { UserContext, DialogsContext } from '../../../context'
+
+import { useStyles } from './styles'
 
 import { LOGIN } from '../../../constants/mutations'
 
@@ -26,11 +30,13 @@ const initialInputsState = {
   loginError: null
 }
 
-const SignInFormComponent = ({ classes, ...props }) => {
+const SignInFormComponent = props => {
   const [inputValues, setInputValues] = useState(initialInputsState)
-  const appContext = useContext(AppContext)
-  const profileContext = useContext(ProfileContext)
+
+  const userContext = useContext(UserContext)
   const dialogsContext = useContext(DialogsContext)
+
+  const classes = useStyles()
 
   const updateField = event => {
     setInputValues({ ...inputValues, [event.target.name]: event.target.value })
@@ -41,8 +47,10 @@ const SignInFormComponent = ({ classes, ...props }) => {
   const saveUserData = data => {
     setInputValues({ ...inputValues, ...initialInputsState })
     localStorage.setItem('token', data.login.token)
-    appContext.dispatch({ type: 'logInUser', auth: true })
-    profileContext.dispatch({ type: 'setProfile', profile: data.login.profile })
+    userContext.dispatch({
+      type: 'setUser',
+      ...data.login.user
+    })
     dialogsContext.dispatch({ type: 'toggleSignDialog' })
   }
 

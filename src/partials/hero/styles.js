@@ -1,6 +1,7 @@
-export const styles = () => ({
+import { makeStyles } from '@material-ui/core/styles'
+export const useStyles = makeStyles(theme => ({
   HeroFullHeight: {
-    height: '100vh'
+    height: '200vh'
   },
   gridContainer: {
     flexGrow: 1,
@@ -10,7 +11,7 @@ export const styles = () => ({
     color: '#fff',
     margin: 'auto',
     textAlign: 'center',
-    fontSize: '15rem',
+    fontSize: '1rem',
     fontWeight: '700',
     opacity: '0.5'
   },
@@ -18,4 +19,4 @@ export const styles = () => ({
     color: '#fff',
     fontSize: '1.5rem'
   }
-})
+}))

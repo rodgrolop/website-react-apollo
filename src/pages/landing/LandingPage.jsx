@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { useStyles } from './styles'
+
 import HeroFullHeight from '../../partials/hero'
 
 // Assets
@@ -11,10 +13,14 @@ const heroProps = {
   backGroundImage: heroImage
 }
 
-const LandingPage = () => (
-  <React.Fragment>
-    <HeroFullHeight heroProps={heroProps} />
-  </React.Fragment>
-)
+const LandingPage = () => {
+  const classes = useStyles()
+
+  return (
+    <React.Fragment>
+      <HeroFullHeight heroProps={heroProps} />
+    </React.Fragment>
+  )
+}
 
 export default LandingPage

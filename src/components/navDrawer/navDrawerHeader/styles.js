@@ -1,8 +1,9 @@
-export const styles = () => ({
+import { makeStyles } from '@material-ui/core/styles'
+export const useStyles = makeStyles(theme => ({
   cardDrawer: {
-    borderRadius: '0',
+    borderRadius: 0,
     boxShadow: 'none',
-    minHeight: '120px'
+    minHeight: 120
   },
   cardMedia: { height: '100%' },
   cardMediaGrid: {
@@ -17,4 +18,4 @@ export const styles = () => ({
     backgroundColor: '#f50057',
     textTransform: 'uppercase'
   }
-})
+}))

@@ -1,10 +1,13 @@
 import React from 'react'
 
+import { useStyles } from './styles'
+
 import CardMedia from '@material-ui/core/CardMedia'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
-const HeroPartial = ({ classes, heroProps, ...props }) => {
+const HeroPartial = ({ heroProps, ...props }) => {
+  const classes = useStyles()
   return (
     <React.Fragment>
       <CardMedia
@@ -21,11 +24,7 @@ const HeroPartial = ({ classes, heroProps, ...props }) => {
         >
           {heroProps.heroTitle && (
             <Grid item className={classes.gridItem} xs={12} sm={10}>
-              <Typography
-                className={classes.heroTitle}
-                variant='h1'
-                size='48px'
-              >
+              <Typography className={classes.heroTitle} variant='h1'>
                 {heroProps.heroTitle}
               </Typography>
             </Grid>

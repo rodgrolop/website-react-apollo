@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { useStyles } from './styles'
+
 import Avatar from '@material-ui/core/Avatar'
 import MenuItem from '@material-ui/core/MenuItem'
 import Popover from '@material-ui/core/Popover'
@@ -12,8 +14,11 @@ const initialState = {
   anchorEl: null
 }
 
-const NavBarRightAuthButtonsComponent = ({ classes, profile }) => {
+const NavBarRightAuthButtonsComponent = profile => {
   const [state, setState] = useState({ ...initialState })
+
+  const classes = useStyles()
+
   const isMenuOpen = Boolean(state.anchorEl)
 
   const toggleProfileMenu = event => {
@@ -33,7 +38,11 @@ const NavBarRightAuthButtonsComponent = ({ classes, profile }) => {
         <NotificationsIcon className={classes.icon} />
         {/* </Badge> */}
       </IconButton>
-      <IconButton aria-haspopup='true' onClick={toggleProfileMenu}>
+      <IconButton
+        aria-haspopup='true'
+        onClick={toggleProfileMenu}
+        className={classes.iconAvatarButton}
+      >
         <Avatar
           // alt={profile.user.username}
           // src={profile.profilePicture}
@@ -41,6 +50,7 @@ const NavBarRightAuthButtonsComponent = ({ classes, profile }) => {
         >
           {/* {profile.profilePicture === null &&
                   profile.user.username.charAt(0)} */}
+          R
         </Avatar>
       </IconButton>
       <Popover

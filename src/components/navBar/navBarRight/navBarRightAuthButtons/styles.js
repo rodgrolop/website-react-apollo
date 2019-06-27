@@ -1,15 +1,19 @@
-export const styles = () => ({
+import { makeStyles } from '@material-ui/core/styles'
+export const useStyles = makeStyles(theme => ({
   icon: {
     color: 'white',
-    height: '24px',
-    width: '24px'
+    height: 24,
+    width: 24
+  },
+  iconAvatarButton: {
+    padding: 8
   },
   iconAvatar: {
     color: 'white',
-    height: '24px',
-    width: '24px',
-    fontSize: '0.75rem',
+    height: 32,
+    width: 32,
+    fontSize: '1rem',
     backgroundColor: '#f50057',
     textTransform: 'uppercase'
   }
-})
+}))
