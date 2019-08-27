@@ -22,43 +22,41 @@ const NavDrawerHeaderComponent = () => {
   const classes = useStyles()
 
   return isAuth ? (
-    <React.Fragment>
-      <Card className={classes.cardDrawer}>
-        <CardMedia
-          image='https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-          title='Paella dish'
-          className={classes.cardMedia}
+    <Card className={classes.cardDrawer}>
+      <CardMedia
+        image='https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+        title='Paella dish'
+        className={classes.cardMedia}
+      >
+        <Grid
+          container
+          direction='row'
+          justify='center'
+          alignItems='flex-end'
+          className={classes.cardMediaGrid}
         >
-          <Grid
-            container
-            direction='row'
-            justify='center'
-            alignItems='flex-end'
-            className={classes.cardMediaGrid}
-          >
-            <CardHeader
-              avatar={
-                <Avatar
-                  alt={username}
-                  src={profile.profilePicture}
-                  className={classes.iconAvatar}
-                >
-                  {profile.profilePicture === null && username.charAt(0)}
-                </Avatar>
-              }
-              title={username}
-              subheader=''
-              className={classes.cardHeader}
-              action={
-                <IconButton>
-                  <MoreVertIcon />
-                </IconButton>
-              }
-            />
-          </Grid>
-        </CardMedia>
-      </Card>
-    </React.Fragment>
+          <CardHeader
+            avatar={
+              <Avatar
+                alt={username}
+                src={profile.profilePicture}
+                className={classes.iconAvatar}
+              >
+                {profile.profilePicture === null && username.charAt(0)}
+              </Avatar>
+            }
+            title={username}
+            subheader=''
+            className={classes.cardHeader}
+            action={
+              <IconButton>
+                <MoreVertIcon />
+              </IconButton>
+            }
+          />
+        </Grid>
+      </CardMedia>
+    </Card>
   ) : (
     <div>Hola</div>
   )

@@ -18,13 +18,13 @@ import MailIcon from '@material-ui/icons/Mail'
 const useStyles = makeStyles(styles)
 
 const NavDrawerContentComponent = () => {
-  const sideBarContext = useContext(SideBarContext)
-  const { isDrawerOpen, drawerPersistent, miniDrawer } = sideBarContext.state
+  const { dispatch, state } = useContext(SideBarContext)
+  const { isDrawerOpen, drawerPersistent, miniDrawer } = state
 
   const classes = useStyles()
 
   const closeDrawer = () => {
-    sideBarContext.dispatch({ type: 'closeDrawer' })
+    dispatch({ type: 'closeDrawer' })
   }
 
   return (

@@ -1,17 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, Suspense, lazy } from 'react'
 import { UserContext } from '../../../context'
 
-import NavBarRightAuthButtonsComponent from './navBarRightAuthButtons'
-import NavBarRightButtonsComponent from './navBarRightButtons'
+import CircularProgress from '@material-ui/core/CircularProgress'
+
+const NavBarRightAuthButtonsComponent = lazy(() =>
+  import('./navBarRightAuthButtons')
+)
+const NavBarRightButtonsComponent = lazy(() => import('./navBarRightButtons'))
 
 const NavBarRightComponent = () => {
   const userContext = useContext(UserContext)
-  const userState = userContext.state
+  const { isAuth } = userContext.state
 
-  return userState.isAuth ? (
-    <NavBarRightAuthButtonsComponent />
+  return isAuth ? (
+    <Suspense fallback={<CircularProgress size={24} color='secondary' />}>
+      <NavBarRightAuthButtonsComponent />
+    </Suspense>
   ) : (
-    <NavBarRightButtonsComponent />
+    <Suspense fallback={<CircularProgress size={24} color='secondary' />}>
+      <NavBarRightButtonsComponent />
+    </Suspense>
   )
 }
 export default NavBarRightComponent

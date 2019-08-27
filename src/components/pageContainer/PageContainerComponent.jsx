@@ -13,11 +13,11 @@ import LazyDialogsComponent from '../lazyDialogs'
 import ContentFixComponent from '../contentFix'
 
 const PageContainerComponent = props => {
-  const userContext = useContext(UserContext)
-  const { isAuth } = userContext.state
+  const { dispatch, state } = useContext(UserContext)
+  const { isAuth } = state
   const saveUserData = data => {
     if (!isAuth) {
-      userContext.dispatch({
+      dispatch({
         type: 'setUser',
         ...data.me
       })

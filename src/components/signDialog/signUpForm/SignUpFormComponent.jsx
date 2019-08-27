@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 
 import { Mutation } from 'react-apollo'
 
-import { AppContext, DialogsContext } from '../../../context'
+import { DialogsContext } from '../../../context'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { styles } from './styles'
@@ -37,8 +37,7 @@ const initialInputsState = {
 const SignUpFormComponent = props => {
   const [inputValues, setInputValues] = useState(initialInputsState)
 
-  const appContext = useContext(AppContext)
-  const dialogsContext = useContext(DialogsContext)
+  const dispatchDialogs = useContext(DialogsContext).dispatch
 
   const classes = useStyles()
 
@@ -51,8 +50,7 @@ const SignUpFormComponent = props => {
   const saveUserData = data => {
     setInputValues({ ...inputValues, ...initialInputsState })
     localStorage.setItem('token', data.register.token)
-    appContext.dispatch({ type: 'logInUser', me: data.register.user })
-    dialogsContext.dispatch({ type: 'toggleSignDialog' })
+    dispatchDialogs({ type: 'toggleSignDialog' })
   }
 
   const { username, email, password } = inputValues

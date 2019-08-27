@@ -42,6 +42,8 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontSize: 12
   },
+  // Drawer colors
+  drawerBackground: grey[900],
   // Drawer widths
   drawerWidth: 240,
   drawerWidthMini: 40,
@@ -56,6 +58,13 @@ const theme = createMuiTheme({
     // NavBar overrides
     // NavBarLeft overrides
     // NavBarRight overrides
+    // Drawer Overrides
+    MuiDrawer: {
+      paperAnchorDockedLeft: {
+        marginTop: 48,
+        borderRight: 'none'
+      }
+    }
   }
 })
 

@@ -1,6 +1,6 @@
 export const styles = {
   HeroFullHeight: {
-    height: '200vh'
+    height: '100vh'
   },
   gridContainer: {
     flexGrow: 1,
@@ -16,6 +16,7 @@ export const styles = {
   },
   heroSubtitle: {
     color: '#fff',
-    fontSize: '1.5rem'
+    textAlign: 'center',
+    fontSize: '1rem'
   }
 }

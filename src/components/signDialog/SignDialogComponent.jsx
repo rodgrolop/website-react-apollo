@@ -19,12 +19,11 @@ import SignUpFormComponent from './signUpForm/'
 const useStyles = makeStyles(styles)
 
 const SignDialogComponent = () => {
-  const dialogsContext = useContext(DialogsContext)
+  const { dispatch, state } = useContext(DialogsContext)
 
   const classes = useStyles()
 
-  const closeAuthDialog = () =>
-    dialogsContext.dispatch({ type: 'toggleSignDialog' })
+  const closeAuthDialog = () => dispatch({ type: 'toggleSignDialog' })
 
   const [tabValueState, setTabValueState] = useState(0)
 
@@ -34,7 +33,7 @@ const SignDialogComponent = () => {
 
   return (
     <Dialog
-      open={dialogsContext.state.isSignDialogOpen}
+      open={state.isSignDialogOpen}
       onClose={closeAuthDialog}
       aria-labelledby='form-dialog-title'
     >

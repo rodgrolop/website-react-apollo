@@ -36,8 +36,8 @@ const initialInputsState = {
 const SignInFormComponent = props => {
   const [inputValues, setInputValues] = useState(initialInputsState)
 
-  const userContext = useContext(UserContext)
-  const dialogsContext = useContext(DialogsContext)
+  const dispatchUser = useContext(UserContext).dispatch
+  const dispatchDialogs = useContext(DialogsContext).dispatch
 
   const classes = useStyles()
 
@@ -50,11 +50,11 @@ const SignInFormComponent = props => {
   const saveUserData = data => {
     setInputValues({ ...inputValues, ...initialInputsState })
     localStorage.setItem('token', data.login.token)
-    userContext.dispatch({
+    dispatchUser({
       type: 'setUser',
       ...data.login.user
     })
-    dialogsContext.dispatch({ type: 'toggleSignDialog' })
+    dispatchDialogs({ type: 'toggleSignDialog' })
   }
 
   const { login, password } = inputValues
@@ -134,7 +134,7 @@ const SignInFormComponent = props => {
           <Grid container justify='center' className={classes.gridContainer}>
             <Grid item>
               {loading ? (
-                <CircularProgress size={29} />
+                <CircularProgress size={24} />
               ) : (
                 <Button
                   type='submit'

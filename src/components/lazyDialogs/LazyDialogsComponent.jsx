@@ -7,13 +7,11 @@ const LazyDialogsComponent = () => {
   const dialogsContext = useContext(DialogsContext)
 
   return (
-    <React.Fragment>
-      {dialogsContext.state.isSignDialogOpen && (
-        <Suspense fallback={null}>
-          <SignDialogComponent />
-        </Suspense>
-      )}
-    </React.Fragment>
+    dialogsContext.state.isSignDialogOpen && (
+      <Suspense fallback={null}>
+        <SignDialogComponent />
+      </Suspense>
+    )
   )
 }
 

@@ -12,37 +12,35 @@ const useStyles = makeStyles(styles)
 const HeroPartial = ({ heroProps, ...props }) => {
   const classes = useStyles()
   return (
-    <React.Fragment>
-      <CardMedia
-        image={heroProps.backGroundImage}
-        title={heroProps.heroTitle}
-        className={classes.HeroFullHeight}
+    <CardMedia
+      image={heroProps.backGroundImage}
+      title={heroProps.heroTitle}
+      className={classes.HeroFullHeight}
+    >
+      <Grid
+        container
+        className={classes.gridContainer}
+        direction='row'
+        justify='center'
+        alignItems='center'
       >
-        <Grid
-          container
-          className={classes.gridContainer}
-          direction='row'
-          justify='center'
-          alignItems='center'
-        >
-          {heroProps.heroTitle && (
-            <Grid item className={classes.gridItem} xs={12} sm={10}>
-              <Typography className={classes.heroTitle} variant='h1'>
-                {heroProps.heroTitle}
-              </Typography>
-            </Grid>
-          )}
-          {heroProps.heroSubtitle && (
-            <Grid item className={classes.gridItem} xs={12} sm={10}>
-              <Typography className={classes.heroSubtitle} variant='h4'>
-                {heroProps.heroSubtitle}
-              </Typography>
-            </Grid>
-          )}
-          {props.children}
-        </Grid>
-      </CardMedia>
-    </React.Fragment>
+        {heroProps.heroTitle && (
+          <Grid item className={classes.gridItem} xs={12} sm={10}>
+            <Typography className={classes.heroTitle} variant='h1'>
+              {/* {heroProps.heroTitle} */}
+            </Typography>
+          </Grid>
+        )}
+        {heroProps.heroSubtitle && (
+          <Grid item className={classes.gridItem} xs={12} sm={10}>
+            <Typography className={classes.heroSubtitle} variant='h4'>
+              {/* {heroProps.heroSubtitle} */}
+            </Typography>
+          </Grid>
+        )}
+        {props.children}
+      </Grid>
+    </CardMedia>
   )
 }
 

@@ -1,8 +1,12 @@
+import theme from '../../theme/theme'
 export const styles = {
   grow: { flexGrow: 1 },
   appBar: {},
   toolBar: {
-    minHeight: 48
+    minHeight: 48,
+    [theme.breakpoints.up('sm')]: {
+      padding: '0 16px'
+    }
   },
   logo: {
     height: 36,

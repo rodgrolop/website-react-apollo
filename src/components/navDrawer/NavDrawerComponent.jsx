@@ -20,31 +20,26 @@ const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 const useStyles = makeStyles(styles)
 
 const NavDrawerComponent = () => {
-  const sideBarContext = useContext(SideBarContext)
-  const { isDrawerOpen, drawerPersistent, miniDrawer } = sideBarContext.state
+  const { dispatch, state } = useContext(SideBarContext)
+  const { isDrawerOpen, drawerPersistent, miniDrawer } = state
 
   const toggleDrawer = () => {
     isDrawerOpen
-      ? sideBarContext.dispatch({ type: 'closeDrawer' })
-      : sideBarContext.dispatch({ type: 'openDrawer' })
+      ? dispatch({ type: 'closeDrawer' })
+      : dispatch({ type: 'openDrawer' })
   }
 
   const setPersistentDrawer = () =>
-    !drawerPersistent &&
-    sideBarContext.dispatch({ type: 'setPersistentDrawer' })
+    !drawerPersistent && dispatch({ type: 'setPersistentDrawer' })
 
   const setTemporaryDrawer = () =>
-    drawerPersistent && sideBarContext.dispatch({ type: 'setTemporaryDrawer' })
+    drawerPersistent && dispatch({ type: 'setTemporaryDrawer' })
 
   const setMiniDrawer = () =>
-    drawerPersistent &&
-    !miniDrawer &&
-    sideBarContext.dispatch({ type: 'setMiniDrawer' })
+    drawerPersistent && !miniDrawer && dispatch({ type: 'setMiniDrawer' })
 
   const unsetMiniDrawer = () =>
-    drawerPersistent &&
-    miniDrawer &&
-    sideBarContext.dispatch({ type: 'unsetMiniDrawer' })
+    drawerPersistent && miniDrawer && dispatch({ type: 'unsetMiniDrawer' })
 
   const theme = useTheme()
   const classes = useStyles()
@@ -53,23 +48,22 @@ const NavDrawerComponent = () => {
   matches ? setPersistentDrawer() : setTemporaryDrawer()
 
   return (
-    <React.Fragment>
-      <SwipeableDrawer
-        anchor='left'
-        variant={matches ? 'persistent' : 'temporary'}
-        open={isDrawerOpen}
-        onOpen={toggleDrawer}
-        onClose={toggleDrawer}
-        disableBackdropTransition={!iOS}
-        disableDiscovery={iOS}
-      >
-        <NavDrawerHeaderComponent />
-        <IconButton onClick={!miniDrawer ? setMiniDrawer : unsetMiniDrawer}>
-          {miniDrawer ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-        </IconButton>
-        <NavDrawerContentComponent />
-      </SwipeableDrawer>
-    </React.Fragment>
+    <SwipeableDrawer
+      anchor='left'
+      variant={matches ? 'persistent' : 'temporary'}
+      open={isDrawerOpen}
+      onOpen={toggleDrawer}
+      onClose={toggleDrawer}
+      disableBackdropTransition={!iOS}
+      disableDiscovery={iOS}
+      className={classes.drawer}
+    >
+      <NavDrawerHeaderComponent />
+      <IconButton onClick={!miniDrawer ? setMiniDrawer : unsetMiniDrawer}>
+        {miniDrawer ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+      </IconButton>
+      <NavDrawerContentComponent />
+    </SwipeableDrawer>
   )
 }
 
