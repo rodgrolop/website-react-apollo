@@ -20,11 +20,10 @@ const reducer = (state, action) => {
       }
     case 'unSetUser':
       return {
-        ...state,
         ...initialState
       }
     default:
-      return { initialState }
+      return { ...initialState }
   }
 }
 

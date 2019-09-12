@@ -42,4 +42,5 @@ const PageContainerComponent = props => {
   )
 }
 
-export default PageContainerComponent
+// export default PageContainerComponent
+export default React.memo(PageContainerComponent, true)
