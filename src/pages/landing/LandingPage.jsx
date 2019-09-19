@@ -10,15 +10,12 @@ import Typography from '@material-ui/core/Typography'
 
 import HeroFullHeight from '../../partials/hero'
 
-// Assets
-import heroImage from '../../assets/images/hero/LandingHero.jpeg'
-
 const useStyles = makeStyles(styles)
 
 const heroProps = {
-  heroTitle: 'Landing Page',
-  heroSubtitle: 'A Badass Material-UI Kit based on Material Design.',
-  backGroundImage: heroImage
+  heroTitle: 'rgl',
+  heroSubtitle: '',
+  backGroundImage: ''
 }
 
 const LandingPage = () => {
@@ -28,17 +25,20 @@ const LandingPage = () => {
     <React.Fragment>
       <HeroFullHeight heroProps={heroProps} />
       <Container maxWidth='xl' className={classes.mainContainer}>
-        <Paper className={classes.raisedPaper}>
-          <Typography variant='h6'>Container</Typography>
+        <Paper className={classes.normalPaper}>
+          <Typography variant='h6'>What We do</Typography>
         </Paper>
         <Paper className={classes.normalPaper}>
-          <Typography variant='h6'>Container</Typography>
+          <Typography variant='h6'>Skills</Typography>
         </Paper>
         <Paper className={classes.normalPaper}>
-          <Typography variant='h6'>Container</Typography>
+          <Typography variant='h6'>Portfolio</Typography>
         </Paper>
         <Paper className={classes.normalPaper}>
-          <Typography variant='h6'>Container</Typography>
+          <Typography variant='h6'>Blog</Typography>
+        </Paper>
+        <Paper className={classes.normalPaper}>
+          <Typography variant='h6'>TODO</Typography>
         </Paper>
       </Container>
     </React.Fragment>

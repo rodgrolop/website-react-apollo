@@ -1,2 +1,3 @@
 import ThemeProviderComponent from './ThemeProviderComponent'
-export default ThemeProviderComponent
+import theme from './theme'
+export { theme, ThemeProviderComponent }

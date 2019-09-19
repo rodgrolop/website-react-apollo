@@ -18,9 +18,10 @@ export const styles = {
   normalPaper: {
     height: 600,
     maxWidth: 1280,
-    margin: '0 auto 20px',
+    margin: '10px auto 10px',
     padding: '30px 20px 50px',
     '@media (min-width: 1280px)': {
+      marginTop: 60,
       marginBottom: 60,
       padding: '80px 100px'
     }

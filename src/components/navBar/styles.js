@@ -1,4 +1,4 @@
-import theme from '../../theme/theme'
+import { theme } from '../../theme'
 export const styles = {
   grow: { flexGrow: 1 },
   appBar: {},

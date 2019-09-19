@@ -27,7 +27,7 @@ const HeroPartial = ({ heroProps, ...props }) => {
         {heroProps.heroTitle && (
           <Grid item className={classes.gridItem} xs={12} sm={10}>
             <Typography className={classes.heroTitle} variant='h1'>
-              {/* {heroProps.heroTitle} */}
+              {heroProps.heroTitle}
             </Typography>
           </Grid>
         )}

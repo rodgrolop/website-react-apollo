@@ -12,7 +12,7 @@ import {
 } from '../../context'
 
 // Theme provider
-import ThemeProviderComponent from '../../theme'
+import { ThemeProviderComponent } from '../../theme'
 
 // Apollo Provider
 import ApolloProviderComponent from '../../apollo'
