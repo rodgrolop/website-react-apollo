@@ -22,7 +22,7 @@
     "react-apollo": "^3.0.1",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.1.1",
+    "react-scripts": "^5.0.1",
     "react-scrollbars-custom": "^4.0.20",
     "react-tracked": "^0.8.0",
     "subscriptions-transport-ws": "^0.9.16",
